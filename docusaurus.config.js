@@ -87,8 +87,8 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
-            label: "GitHub",
+            href: "https://www.cladfy.com",
+            label: "website",
             position: "right",
           },
         ],
@@ -100,43 +100,47 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
+                label: "Devs",
                 to: "/docs/intro",
               },
             ],
           },
           {
-            title: "Community",
+            title: "Get Strated",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                label: "Business",
+                href: "https://dashboard.cladfy.com",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
+                label: "Merchant",
+                href: "https://app.cladfy.com",
               },
               {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                label: "Personal",
+                href: "https://app.cladfy.com",
               },
             ],
           },
           {
-            title: "More",
+            title: "Talk to Us",
             items: [
               {
-                label: "Blog",
-                to: "/blog",
+                label: "Twitter",
+                href: "https://twitter.com/@_cladfy",
               },
               {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                label: "LinkedIn",
+                href: "https://www.linkedin.com/company/cladfyfinancialservices",
+              },
+              {
+                label: "Email",
+                href: "mailto:info@cladfy.com",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Cladfy FS.`,
       },
       prism: {
         theme: lightCodeTheme,
