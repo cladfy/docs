@@ -2,7 +2,7 @@
 slug: why-cashflow-data
 title: Reasons to Leverage Cash Flow Data
 authors: kibejohn
-tags: [hola, docusaurus]
+tags: [Cashflow, Transactions, Reconciliation]
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet

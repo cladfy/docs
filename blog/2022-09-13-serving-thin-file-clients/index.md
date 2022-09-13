@@ -2,11 +2,12 @@
 slug: serving-thin-file-clients
 title: Serving thin-file clients
 authors: kibejohn
-tags: [Thin-file, Clients, CreditScore]
+tags: [Thin-file, Clients, CreditScore, Transactions]
 ---
 
 
 ![Thin file client description example](./thinfileclient.png)
+*General description of the millions of thin-file Africans*
 
 **Who are Thin-File Clients**
 

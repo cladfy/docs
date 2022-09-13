@@ -13,5 +13,9 @@ tags: [Consumer-permissioned-data, Privacy, Consumer]
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
 
+<!--truncate-->
+
+
 ![Consumer permision request email](./consumer-permissioned-data-email.png)
 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
