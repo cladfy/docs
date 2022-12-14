@@ -1,0 +1,4479 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Cladfy",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/signup/": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Signup User",
+        "operationId": "signup_user_signup__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccount"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login/access-token": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Login",
+        "description": "OAuth2 compatible token login, get an access token for future requests",
+        "operationId": "login_auth_login_access_token_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_auth_login_access_token_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset-password/": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Reset Password",
+        "description": "Reset password",
+        "operationId": "reset_password_auth_reset_password__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_reset_password_auth_reset_password__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/password-recovery/{email}": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Recover Password",
+        "operationId": "recover_password_auth_password_recovery__email__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Email",
+              "type": "string"
+            },
+            "name": "email",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/verify/{token}": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Verify Account",
+        "operationId": "verifyToken",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Token",
+              "type": "string"
+            },
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/verify-invitation/{token}": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Verify Invitation",
+        "operationId": "verifyInvitation",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Token",
+              "type": "string"
+            },
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvitationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/accept-invitation/{token}": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Accept Invitation",
+        "operationId": "acceptInvitation",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Token",
+              "type": "string"
+            },
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptInvitationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get Logged In User",
+        "operationId": "getMe",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/users/change-password": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Post Change Password",
+        "operationId": "post_change_password_users_change_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/users/calculators": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get Business Calculators",
+        "operationId": "get_business_calculators_users_calculators_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Business Calculators Users Calculators Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalculatorResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/users/switch-business": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Switch Business",
+        "operationId": "switchBusiness",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwitchBusiness"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Clients",
+        "operationId": "get_clients_clients__get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Skip",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "type": "integer",
+              "default": 1000
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Query",
+              "type": "string"
+            },
+            "name": "query",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientPaginatedResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      },
+      "post": {
+        "tags": ["clients"],
+        "summary": "Create Client",
+        "operationId": "create_client_clients__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateClient"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client",
+        "operationId": "get_client_clients__id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientResponse"
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/documents": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Client Documents",
+        "operationId": "client_documents_clients__id__documents_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response 200 Client Documents Clients  Id  Documents Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Document"
+                  }
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/{id}/link-mono": {
+      "post": {
+        "tags": ["clients"],
+        "summary": "Link Mono",
+        "operationId": "link_mono_clients__id__link_mono_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkMono"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkMono"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}/create-link": {
+      "post": {
+        "tags": ["clients"],
+        "summary": "Create Link",
+        "operationId": "createMonoLink",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLinkReponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/email-link": {
+      "post": {
+        "tags": ["clients"],
+        "summary": "Email Link To Client",
+        "operationId": "emailLinkToClient",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkEmail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/link/{id}": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Link",
+        "operationId": "getLink",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}/linked-accounts": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Client Linked Accounts",
+        "operationId": "clientLinkedAccounts",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Linked accounts requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response 200 Clientlinkedaccounts",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientLinkedAccountResponse"
+                  }
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/summary": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Client Summary",
+        "operationId": "clientSummary",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client summary requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientSummaryResponse"
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/transactions": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Transaction Handler",
+        "operationId": "clientTransactions",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Clienttransactions",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/cashflow": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Cashflow Handler",
+        "operationId": "clientCashflow",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashflowResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/spending": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Spending Handler",
+        "operationId": "clientSpending",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/loans": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Loans Handler",
+        "operationId": "clientLoans",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/savings": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Savings Handler",
+        "operationId": "clientSavings",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavingsSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/gambling": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Gambling Handler",
+        "operationId": "get_client_gambling",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamblingSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/overdraft": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Overdraft",
+        "operationId": "get_client_overdraft",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverdraftResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/affordability": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Affordability Handler",
+        "operationId": "get_client_affordability",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AffordabilityResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/document_polling": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Document Polling",
+        "operationId": "documentPolling",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPolling"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/estimate_loan": {
+      "post": {
+        "tags": ["clients"],
+        "summary": "Estimate Loan",
+        "operationId": "esimateClientLoan",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanEsimateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoanEsimate"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/{id}/trends": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Get Client Trends",
+        "description": "This resource represents the known trends on the client transactions. This currently only supports mpesa transactions.",
+        "operationId": "clientTrends",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/Trends"
+                }
+              ],
+              "default": "money_sent"
+            },
+            "name": "trend",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientTrends"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/businesses/calculators": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Get Business Calculcators",
+        "operationId": "getCalculators",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Getcalculators",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalculatorResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["businesses"],
+        "summary": "Create A Calculator",
+        "operationId": "createCalculator",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCalculator"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalculatorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:calculator"]
+          }
+        ]
+      }
+    },
+    "/businesses/calculators/{id}": {
+      "post": {
+        "tags": ["businesses"],
+        "summary": "Update A Calculator",
+        "operationId": "updateCalculator",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCalculator"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:calculator"]
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["businesses"],
+        "summary": "Delete A Calculator",
+        "operationId": "deleteCalculator",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:calculator"]
+          }
+        ]
+      }
+    },
+    "/businesses/members": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Get Business Members",
+        "operationId": "getTeam",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Getteam",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TeamResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      }
+    },
+    "/businesses/members/{id}": {
+      "delete": {
+        "tags": ["businesses"],
+        "summary": "Delete A Member",
+        "operationId": "deleteMember",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      }
+    },
+    "/businesses/roles": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Roles",
+        "operationId": "getRoles",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Getroles",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoleResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      },
+      "post": {
+        "tags": ["businesses"],
+        "summary": "Create Role Handler",
+        "operationId": "createRole",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      }
+    },
+    "/businesses/members/{member_id}/role": {
+      "patch": {
+        "tags": ["businesses"],
+        "summary": "Upadate Member Role",
+        "operationId": "updateRole",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Member Id",
+              "type": "integer"
+            },
+            "name": "member_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRole"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      }
+    },
+    "/businesses/invite-member": {
+      "post": {
+        "tags": ["businesses"],
+        "summary": "Post Invite Member",
+        "operationId": "inviteMember",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Email",
+              "type": "string"
+            },
+            "name": "email",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Role",
+              "type": "string"
+            },
+            "name": "role",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:team"]
+          }
+        ]
+      }
+    },
+    "/businesses/stats": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Get Business Stats",
+        "operationId": "business_stats",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessStats"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/documents/create_document": {
+      "post": {
+        "tags": ["documents"],
+        "summary": "Create Document",
+        "operationId": "create_document_documents_create_document_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["upload:document"]
+          }
+        ]
+      }
+    },
+    "/documents/upload": {
+      "post": {
+        "tags": ["documents"],
+        "summary": "Upload",
+        "operationId": "upload_documents_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_documents_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadedFile"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["upload:document"]
+          }
+        ]
+      }
+    },
+    "/documents/{id}/affordability": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Affordability",
+        "operationId": "getDocumentAffordability",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AffordabilityResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{id}/spending": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Spending Behaviour",
+        "operationId": "get_document_spending_behaviour",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{id}/loans": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Loans",
+        "operationId": "get_document_loans",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{id}/gambling": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Gambling",
+        "operationId": "get_document_gambling",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamblingSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{id}/overdraft": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Overdraft",
+        "operationId": "get_document_overdraft",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverdraftResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Documents",
+        "operationId": "get_documents",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Skip",
+              "type": "integer",
+              "default": 0
+            },
+            "name": "skip",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "type": "integer",
+              "default": 100
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Q",
+              "type": "string"
+            },
+            "name": "q",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/documents/retry/{id}": {
+      "post": {
+        "tags": ["documents"],
+        "summary": "Retry Analyzing Document",
+        "operationId": "retry_analyzing_document",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Password",
+              "type": "string"
+            },
+            "name": "password",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/documents/{id}/status": {
+      "get": {
+        "tags": ["documents"],
+        "summary": "Get Document Polling",
+        "operationId": "checkAnalyzing",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPolling"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/mono/callback": {
+      "post": {
+        "tags": ["webhooks"],
+        "summary": "Callback",
+        "operationId": "callback_mono_callback_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Mono-Webhook-Secret",
+              "type": "string"
+            },
+            "name": "mono-webhook-secret",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Callback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/index/callback": {
+      "post": {
+        "tags": ["webhooks"],
+        "summary": "Callback",
+        "operationId": "callback_index_callback_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mono/supported_institutions": {
+      "get": {
+        "tags": ["integrations"],
+        "summary": "Get Mono Supported Institutions",
+        "operationId": "get_mono_supported_institutions_mono_supported_institutions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Mono Supported Institutions Mono Supported Institutions Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Institution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permissions": {
+      "get": {
+        "tags": ["permissions"],
+        "summary": "Get Permissions",
+        "operationId": "getPermissions",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Getpermissions",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Permissions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recharge_wallet": {
+      "post": {
+        "tags": ["wallet"],
+        "summary": "Recharge Wallet",
+        "operationId": "recharge_wallet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recharge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/wallet": {
+      "get": {
+        "tags": ["wallet"],
+        "summary": "Wallet Balance",
+        "operationId": "wallet",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Wallet"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:billing"]
+          }
+        ]
+      }
+    },
+    "/wallet/transactions": {
+      "get": {
+        "tags": ["wallet"],
+        "summary": "Wallet Transactions",
+        "operationId": "wallet_transactions",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Wallet Transactions",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WalletTransaction"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:billing"]
+          }
+        ]
+      }
+    },
+    "/payment/history": {
+      "get": {
+        "tags": ["wallet"],
+        "summary": "Payment History",
+        "operationId": "walletHistory",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Wallethistory",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WalletHistory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:billing"]
+          }
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Hello",
+        "operationId": "hello__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "Ping",
+        "operationId": "ping",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ping"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AcceptInvitationRequest": {
+        "title": "AcceptInvitationRequest",
+        "required": ["first_name", "last_name", "password"],
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          }
+        }
+      },
+      "Account": {
+        "title": "Account",
+        "required": ["name", "currency", "type", "accountNumber", "balance"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "accountNumber": {
+            "title": "Accountnumber",
+            "type": "string"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "number"
+          }
+        }
+      },
+      "AccountReponse": {
+        "title": "AccountReponse",
+        "required": ["account"],
+        "type": "object",
+        "properties": {
+          "meta": {
+            "title": "Meta"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          }
+        }
+      },
+      "AccountReponseSchema": {
+        "title": "AccountReponseSchema",
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "accountNumber": {
+            "title": "Accountnumber",
+            "type": "string"
+          },
+          "start_date": {
+            "title": "Start Date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_date": {
+            "title": "End Date",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AffordabilityResponse": {
+        "title": "AffordabilityResponse",
+        "required": ["last_3months_document_affordability"],
+        "type": "object",
+        "properties": {
+          "last_3months_document_affordability": {
+            "title": "Last 3Months Document Affordability",
+            "type": "number"
+          }
+        }
+      },
+      "App": {
+        "title": "App",
+        "required": ["name", "billing_enabled"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "billing_enabled": {
+            "title": "Billing Enabled",
+            "type": "boolean"
+          }
+        }
+      },
+      "Body_login_auth_login_access_token_post": {
+        "title": "Body_login_auth_login_access_token_post",
+        "required": ["username", "password"],
+        "type": "object",
+        "properties": {
+          "grant_type": {
+            "title": "Grant Type",
+            "pattern": "password",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string",
+            "default": ""
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "string"
+          },
+          "client_secret": {
+            "title": "Client Secret",
+            "type": "string"
+          }
+        }
+      },
+      "Body_reset_password_auth_reset_password__post": {
+        "title": "Body_reset_password_auth_reset_password__post",
+        "required": ["token", "new_password"],
+        "type": "object",
+        "properties": {
+          "token": {
+            "title": "Token",
+            "type": "string"
+          },
+          "new_password": {
+            "title": "New Password",
+            "type": "string"
+          }
+        }
+      },
+      "Body_upload_documents_upload_post": {
+        "title": "Body_upload_documents_upload_post",
+        "required": ["fileobject"],
+        "type": "object",
+        "properties": {
+          "fileobject": {
+            "title": "Fileobject",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "BusinessResponse": {
+        "title": "BusinessResponse",
+        "required": ["id", "name", "onwerId"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "onwerId": {
+            "title": "Onwerid",
+            "type": "integer"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "integer"
+          }
+        }
+      },
+      "BusinessStats": {
+        "title": "BusinessStats",
+        "required": ["clients", "documents", "accounts"],
+        "type": "object",
+        "properties": {
+          "clients": {
+            "title": "Clients",
+            "type": "integer"
+          },
+          "documents": {
+            "title": "Documents",
+            "type": "integer"
+          },
+          "accounts": {
+            "title": "Accounts",
+            "type": "integer"
+          }
+        }
+      },
+      "CalculatorResponse": {
+        "title": "CalculatorResponse",
+        "required": ["id", "name", "interest_rate", "duration"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "interest_rate": {
+            "title": "Interest Rate",
+            "type": "number"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "integer"
+          }
+        }
+      },
+      "Callback": {
+        "title": "Callback",
+        "required": ["event"],
+        "type": "object",
+        "properties": {
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "data": {
+            "title": "Data"
+          }
+        }
+      },
+      "CallbackData": {
+        "title": "CallbackData",
+        "required": ["Body"],
+        "type": "object",
+        "properties": {
+          "Body": {
+            "$ref": "#/components/schemas/CallbackDataBody"
+          }
+        }
+      },
+      "CallbackDataBody": {
+        "title": "CallbackDataBody",
+        "required": ["stkCallback"],
+        "type": "object",
+        "properties": {
+          "stkCallback": {
+            "$ref": "#/components/schemas/CallbackDataStkCallback"
+          }
+        }
+      },
+      "CallbackDataStkCallback": {
+        "title": "CallbackDataStkCallback",
+        "required": ["CheckoutRequestID", "ResultCode", "ResultDesc"],
+        "type": "object",
+        "properties": {
+          "CheckoutRequestID": {
+            "title": "Checkoutrequestid",
+            "type": "string"
+          },
+          "ResultCode": {
+            "title": "Resultcode",
+            "type": "integer"
+          },
+          "ResultDesc": {
+            "title": "Resultdesc",
+            "type": "string"
+          },
+          "CallbackMetadata": {
+            "$ref": "#/components/schemas/MetaData"
+          }
+        }
+      },
+      "CallbackMetadataItem": {
+        "title": "CallbackMetadataItem",
+        "required": ["Name"],
+        "type": "object",
+        "properties": {
+          "Name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "Value": {
+            "title": "Value"
+          }
+        }
+      },
+      "CashflowAveragesResponse": {
+        "title": "CashflowAveragesResponse",
+        "required": [
+          "weekly_inflow_average",
+          "weekly_outflow_average",
+          "weekly_average_balance",
+          "daily_inflow_average",
+          "daily_outflow_average",
+          "daily_average_balance"
+        ],
+        "type": "object",
+        "properties": {
+          "weekly_inflow_average": {
+            "title": "Weekly Inflow Average",
+            "type": "number"
+          },
+          "weekly_outflow_average": {
+            "title": "Weekly Outflow Average",
+            "type": "number"
+          },
+          "weekly_average_balance": {
+            "title": "Weekly Average Balance",
+            "type": "number"
+          },
+          "daily_inflow_average": {
+            "title": "Daily Inflow Average",
+            "type": "number"
+          },
+          "daily_outflow_average": {
+            "title": "Daily Outflow Average",
+            "type": "number"
+          },
+          "daily_average_balance": {
+            "title": "Daily Average Balance",
+            "type": "number"
+          }
+        }
+      },
+      "CashflowMonthlyResponse": {
+        "title": "CashflowMonthlyResponse",
+        "required": [
+          "start_date",
+          "paid_in",
+          "withdrawn",
+          "balance",
+          "paid_in_count",
+          "withdrawn_count"
+        ],
+        "type": "object",
+        "properties": {
+          "start_date": {
+            "title": "Start Date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paid_in": {
+            "title": "Paid In",
+            "type": "integer"
+          },
+          "withdrawn": {
+            "title": "Withdrawn",
+            "type": "integer"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "integer"
+          },
+          "paid_in_count": {
+            "title": "Paid In Count",
+            "type": "integer"
+          },
+          "withdrawn_count": {
+            "title": "Withdrawn Count",
+            "type": "integer"
+          }
+        }
+      },
+      "CashflowResponse": {
+        "title": "CashflowResponse",
+        "required": ["monthly", "averages"],
+        "type": "object",
+        "properties": {
+          "monthly": {
+            "title": "Monthly",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashflowMonthlyResponse"
+            }
+          },
+          "averages": {
+            "$ref": "#/components/schemas/CashflowAveragesResponse"
+          }
+        }
+      },
+      "ChangePasswordRequest": {
+        "title": "ChangePasswordRequest",
+        "required": ["new_password", "current_password"],
+        "type": "object",
+        "properties": {
+          "new_password": {
+            "title": "New Password",
+            "type": "string"
+          },
+          "current_password": {
+            "title": "Current Password",
+            "type": "string"
+          }
+        }
+      },
+      "ClientLinkedAccountResponse": {
+        "title": "ClientLinkedAccountResponse",
+        "required": ["id", "client"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "account": {
+            "$ref": "#/components/schemas/AccountReponse"
+          },
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ClientPaginatedResponse": {
+        "title": "ClientPaginatedResponse",
+        "required": ["clients", "count"],
+        "type": "object",
+        "properties": {
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "clients": {
+            "title": "Clients",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "ClientResponse": {
+        "title": "ClientResponse",
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "national_id": {
+            "title": "National Id",
+            "type": "string"
+          },
+          "full_name": {
+            "title": "Full Name",
+            "type": "string"
+          },
+          "total_documents": {
+            "title": "Total Documents",
+            "type": "integer"
+          },
+          "accounts": {
+            "title": "Accounts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountReponseSchema"
+            }
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "transactions_duration": {
+            "title": "Transactions Duration",
+            "type": "string"
+          }
+        }
+      },
+      "ClientSummaryResponse": {
+        "title": "ClientSummaryResponse",
+        "required": ["total_in", "total_out", "loans", "avg_balance"],
+        "type": "object",
+        "properties": {
+          "total_in": {
+            "title": "Total In",
+            "type": "integer"
+          },
+          "total_out": {
+            "title": "Total Out",
+            "type": "integer"
+          },
+          "loans": {
+            "title": "Loans",
+            "type": "integer"
+          },
+          "avg_balance": {
+            "title": "Avg Balance",
+            "type": "number"
+          },
+          "largest_in": {
+            "$ref": "#/components/schemas/TransactionResponse"
+          },
+          "largest_out": {
+            "$ref": "#/components/schemas/TransactionResponse"
+          }
+        }
+      },
+      "ClientTransactionTrend": {
+        "title": "ClientTransactionTrend",
+        "required": [
+          "subject",
+          "frequency",
+          "frequency_percent",
+          "amount",
+          "amount_percent"
+        ],
+        "type": "object",
+        "properties": {
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "frequency": {
+            "title": "Frequency",
+            "type": "integer"
+          },
+          "frequency_percent": {
+            "title": "Frequency Percent",
+            "type": "number"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          },
+          "amount_percent": {
+            "title": "Amount Percent",
+            "type": "number"
+          }
+        }
+      },
+      "ClientTrends": {
+        "title": "ClientTrends",
+        "required": [
+          "total",
+          "count",
+          "largest_amount",
+          "smallest_amount",
+          "avg",
+          "transactions"
+        ],
+        "type": "object",
+        "properties": {
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "largest_amount": {
+            "title": "Largest Amount",
+            "type": "integer"
+          },
+          "smallest_amount": {
+            "title": "Smallest Amount",
+            "type": "integer"
+          },
+          "avg": {
+            "title": "Avg",
+            "type": "number"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientTransactionTrend"
+            }
+          }
+        }
+      },
+      "CreateAccount": {
+        "title": "CreateAccount",
+        "required": ["email", "password", "phone_number"],
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "company_name": {
+            "title": "Company Name",
+            "type": "string"
+          },
+          "preferred_name": {
+            "title": "Preferred Name",
+            "type": "string"
+          }
+        }
+      },
+      "CreateClient": {
+        "title": "CreateClient",
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "national_id": {
+            "title": "National Id",
+            "type": "string"
+          }
+        }
+      },
+      "CreateLinkReponse": {
+        "title": "CreateLinkReponse",
+        "required": ["link"],
+        "type": "object",
+        "properties": {
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "Document": {
+        "title": "Document",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "results": {
+            "title": "Results",
+            "type": "string"
+          },
+          "last_anaylzed_on": {
+            "title": "Last Anaylzed On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DocumentStatus"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "string"
+          },
+          "props": {
+            "title": "Props",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "integer"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "account_id": {
+            "title": "Account Id",
+            "type": "integer"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        }
+      },
+      "DocumentCreate": {
+        "title": "DocumentCreate",
+        "required": ["url", "name"],
+        "type": "object",
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "integer"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          }
+        }
+      },
+      "DocumentLoanSummary": {
+        "title": "DocumentLoanSummary",
+        "required": [
+          "lender",
+          "amount_borrowed",
+          "amount_repaid",
+          "times_taken",
+          "times_repaid"
+        ],
+        "type": "object",
+        "properties": {
+          "lender": {
+            "title": "Lender",
+            "type": "string"
+          },
+          "amount_borrowed": {
+            "title": "Amount Borrowed",
+            "type": "number"
+          },
+          "amount_repaid": {
+            "title": "Amount Repaid",
+            "type": "number"
+          },
+          "times_taken": {
+            "title": "Times Taken",
+            "type": "integer"
+          },
+          "times_repaid": {
+            "title": "Times Repaid",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentLoanSummaryResponse": {
+        "title": "DocumentLoanSummaryResponse",
+        "required": ["loans_summary", "summary"],
+        "type": "object",
+        "properties": {
+          "loans_summary": {
+            "title": "Loans Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentLoanSummary"
+            }
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DocumentLoansSummary"
+          }
+        }
+      },
+      "DocumentLoansSummary": {
+        "title": "DocumentLoansSummary",
+        "required": [
+          "number_of_loans",
+          "amount_borrowed",
+          "amount_repaid",
+          "lenders"
+        ],
+        "type": "object",
+        "properties": {
+          "number_of_loans": {
+            "title": "Number Of Loans",
+            "type": "integer"
+          },
+          "amount_borrowed": {
+            "title": "Amount Borrowed",
+            "type": "number"
+          },
+          "amount_repaid": {
+            "title": "Amount Repaid",
+            "type": "number"
+          },
+          "lenders": {
+            "title": "Lenders",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentPolling": {
+        "title": "DocumentPolling",
+        "required": ["polling"],
+        "type": "object",
+        "properties": {
+          "polling": {
+            "title": "Polling",
+            "type": "boolean"
+          }
+        }
+      },
+      "DocumentResponse": {
+        "title": "DocumentResponse",
+        "required": ["documents", "count"],
+        "type": "object",
+        "properties": {
+          "documents": {
+            "title": "Documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            }
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentStatus": {
+        "title": "DocumentStatus",
+        "enum": [1, 2, 3],
+        "description": "An enumeration."
+      },
+      "GamblingSummary": {
+        "title": "GamblingSummary",
+        "required": [
+          "platform",
+          "amount_spent",
+          "amount_earned",
+          "gambling_freq"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "amount_spent": {
+            "title": "Amount Spent",
+            "type": "number"
+          },
+          "amount_earned": {
+            "title": "Amount Earned",
+            "type": "number"
+          },
+          "gambling_freq": {
+            "title": "Gambling Freq",
+            "type": "integer"
+          }
+        }
+      },
+      "GamblingSummaryResponse": {
+        "title": "GamblingSummaryResponse",
+        "required": ["overview", "summary"],
+        "type": "object",
+        "properties": {
+          "overview": {
+            "$ref": "#/components/schemas/GamblingSummary"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GamblingSummary"
+            }
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Institution": {
+        "title": "Institution",
+        "required": [
+          "name",
+          "type",
+          "country",
+          "primaryColor",
+          "identifier",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "ui": {
+            "title": "Ui"
+          },
+          "country": {
+            "title": "Country",
+            "type": "string"
+          },
+          "primaryColor": {
+            "title": "Primarycolor",
+            "type": "string"
+          },
+          "identifier": {
+            "title": "Identifier",
+            "type": "string"
+          },
+          "icon": {
+            "title": "Icon",
+            "type": "string"
+          },
+          "auth_methods": {
+            "title": "Auth Methods"
+          },
+          "forgotPasswordLink": {
+            "title": "Forgotpasswordlink"
+          },
+          "timeout": {
+            "title": "Timeout",
+            "type": "integer"
+          },
+          "bankCode": {
+            "title": "Bankcode",
+            "type": "string"
+          },
+          "bank_code": {
+            "title": "Bank Code",
+            "type": "string"
+          },
+          "sandbox": {
+            "title": "Sandbox"
+          }
+        }
+      },
+      "InvitationResponse": {
+        "title": "InvitationResponse",
+        "required": ["id", "email", "businessName"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "businessName": {
+            "title": "Businessname",
+            "type": "string"
+          },
+          "firstTime": {
+            "title": "Firsttime",
+            "type": "boolean"
+          }
+        }
+      },
+      "LinkEmail": {
+        "title": "LinkEmail",
+        "required": ["link"],
+        "type": "object",
+        "properties": {
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "LinkMono": {
+        "title": "LinkMono",
+        "required": ["code"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          }
+        }
+      },
+      "LinkResponse": {
+        "title": "LinkResponse",
+        "required": ["client", "link"],
+        "type": "object",
+        "properties": {
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "LoanEsimate": {
+        "title": "LoanEsimate",
+        "required": ["amount"],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          }
+        }
+      },
+      "LoanEsimateRequest": {
+        "title": "LoanEsimateRequest",
+        "required": ["calculator"],
+        "type": "object",
+        "properties": {
+          "calculator": {
+            "title": "Calculator",
+            "type": "integer"
+          }
+        }
+      },
+      "MetaData": {
+        "title": "MetaData",
+        "required": ["Item"],
+        "type": "object",
+        "properties": {
+          "Item": {
+            "title": "Item",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CallbackMetadataItem"
+            }
+          }
+        }
+      },
+      "Msg": {
+        "title": "Msg",
+        "required": ["msg"],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "title": "Msg",
+            "type": "string"
+          }
+        }
+      },
+      "NewCalculator": {
+        "title": "NewCalculator",
+        "required": ["name", "interest_rate", "duration"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "interest_rate": {
+            "title": "Interest Rate",
+            "type": "number"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "integer"
+          }
+        }
+      },
+      "OverdraftOverview": {
+        "title": "OverdraftOverview",
+        "required": [
+          "amount_taken",
+          "amount_paid",
+          "average_loan",
+          "number_of_loans"
+        ],
+        "type": "object",
+        "properties": {
+          "amount_taken": {
+            "title": "Amount Taken",
+            "type": "number"
+          },
+          "amount_paid": {
+            "title": "Amount Paid",
+            "type": "number"
+          },
+          "average_loan": {
+            "title": "Average Loan",
+            "type": "number"
+          },
+          "number_of_loans": {
+            "title": "Number Of Loans",
+            "type": "number"
+          }
+        }
+      },
+      "OverdraftResponse": {
+        "title": "OverdraftResponse",
+        "required": ["overview", "transactions"],
+        "type": "object",
+        "properties": {
+          "overview": {
+            "$ref": "#/components/schemas/OverdraftOverview"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OverdraftTransaction"
+            }
+          }
+        }
+      },
+      "OverdraftTransaction": {
+        "title": "OverdraftTransaction",
+        "required": ["message", "amount", "count"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "number"
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "Permissions": {
+        "title": "Permissions",
+        "required": ["name", "key", "description"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        }
+      },
+      "Ping": {
+        "title": "Ping",
+        "required": ["app"],
+        "type": "object",
+        "properties": {
+          "app": {
+            "$ref": "#/components/schemas/App"
+          }
+        }
+      },
+      "Recharge": {
+        "title": "Recharge",
+        "required": ["phone", "amount"],
+        "type": "object",
+        "properties": {
+          "phone": {
+            "title": "Phone",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          }
+        }
+      },
+      "RoleCreate": {
+        "title": "RoleCreate",
+        "required": ["name", "description", "permissions"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "permissions": {
+            "title": "Permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RoleResponse": {
+        "title": "RoleResponse",
+        "required": ["id", "name"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "permissions": {
+            "title": "Permissions",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SavingSummary": {
+        "title": "SavingSummary",
+        "required": ["total_saved", "total_withdrawn", "platforms"],
+        "type": "object",
+        "properties": {
+          "total_saved": {
+            "title": "Total Saved",
+            "type": "integer"
+          },
+          "total_withdrawn": {
+            "title": "Total Withdrawn",
+            "type": "integer"
+          },
+          "platforms": {
+            "title": "Platforms",
+            "type": "integer"
+          }
+        }
+      },
+      "SavingsSummary": {
+        "title": "SavingsSummary",
+        "required": [
+          "platform",
+          "total_saved",
+          "total_withdrawn",
+          "saved_count",
+          "withdrawn_count"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "total_saved": {
+            "title": "Total Saved",
+            "type": "integer"
+          },
+          "total_withdrawn": {
+            "title": "Total Withdrawn",
+            "type": "integer"
+          },
+          "saved_count": {
+            "title": "Saved Count",
+            "type": "integer"
+          },
+          "withdrawn_count": {
+            "title": "Withdrawn Count",
+            "type": "integer"
+          }
+        }
+      },
+      "SavingsSummaryResponse": {
+        "title": "SavingsSummaryResponse",
+        "required": ["saving_summary", "summary"],
+        "type": "object",
+        "properties": {
+          "saving_summary": {
+            "title": "Saving Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavingsSummary"
+            }
+          },
+          "summary": {
+            "$ref": "#/components/schemas/SavingSummary"
+          }
+        }
+      },
+      "SwitchBusiness": {
+        "title": "SwitchBusiness",
+        "required": ["business_id"],
+        "type": "object",
+        "properties": {
+          "business_id": {
+            "title": "Business Id",
+            "type": "integer"
+          }
+        }
+      },
+      "TeamResponse": {
+        "title": "TeamResponse",
+        "required": ["id", "email", "role", "fullName"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "firstName": {
+            "title": "Firstname",
+            "type": "string"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "currentRole": {
+            "$ref": "#/components/schemas/RoleResponse"
+          },
+          "fullName": {
+            "title": "Fullname",
+            "type": "string"
+          },
+          "lastName": {
+            "title": "Lastname",
+            "type": "string"
+          },
+          "lastLogInAt": {
+            "title": "Lastloginat",
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/UserStatus"
+          }
+        }
+      },
+      "Token": {
+        "title": "Token",
+        "required": ["access_token", "token_type"],
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "title": "Access Token",
+            "type": "string"
+          },
+          "token_type": {
+            "title": "Token Type",
+            "type": "string"
+          }
+        }
+      },
+      "TransactionResponse": {
+        "title": "TransactionResponse",
+        "required": ["id", "amount", "narration", "date"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "number"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "narration": {
+            "title": "Narration",
+            "type": "string"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Trends": {
+        "title": "Trends",
+        "enum": [
+          "money_sent",
+          "money_received",
+          "agent_withdrawal",
+          "agent_deposit",
+          "shopping",
+          "fuel"
+        ],
+        "description": "An enumeration."
+      },
+      "UpdateRole": {
+        "title": "UpdateRole",
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        }
+      },
+      "UploadedFile": {
+        "title": "UploadedFile",
+        "required": ["status", "file_url"],
+        "type": "object",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "file_url": {
+            "title": "File Url",
+            "type": "string"
+          }
+        }
+      },
+      "UserResponse": {
+        "title": "UserResponse",
+        "required": ["email", "id", "first_name"],
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "is_email_verified": {
+            "title": "Is Email Verified",
+            "type": "boolean"
+          },
+          "preferred_name": {
+            "title": "Preferred Name",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/RoleResponse"
+          },
+          "currentBusiness": {
+            "$ref": "#/components/schemas/BusinessResponse"
+          },
+          "businesses": {
+            "title": "Businesses",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessResponse"
+            }
+          },
+          "full_name": {
+            "title": "Full Name",
+            "type": "string"
+          }
+        }
+      },
+      "UserStatus": {
+        "title": "UserStatus",
+        "enum": [1, 2],
+        "description": "An enumeration."
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "Wallet": {
+        "title": "Wallet",
+        "required": ["balance"],
+        "type": "object",
+        "properties": {
+          "balance": {
+            "title": "Balance",
+            "type": "integer"
+          }
+        }
+      },
+      "WalletHistory": {
+        "title": "WalletHistory",
+        "required": ["amount", "status", "narration", "updated_at"],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "narration": {
+            "title": "Narration",
+            "type": "string"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "WalletTransaction": {
+        "title": "WalletTransaction",
+        "required": [
+          "amount",
+          "narration",
+          "id",
+          "created_at",
+          "updated_at",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          },
+          "narration": {
+            "title": "Narration",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "title": "Updated At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WalletTransactionType"
+          }
+        }
+      },
+      "WalletTransactionType": {
+        "title": "WalletTransactionType",
+        "enum": [1, 2],
+        "description": "An enumeration."
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {
+              "edit:business_client": "Perform update functions on business clients nvbv",
+              "delete:business_client": "Perform update functions on business clients bcvbvc",
+              "view:business_client": "Can view all clients of the business data",
+              "edit:client": "Perform update functions on customers",
+              "delete:client": "Perform update functions on customers",
+              "view:client": "Can view client data",
+              "edit:team": "User would be able to edit members and roles",
+              "upload:document": "User would be able to upload a client document",
+              "view:billing": "Can billing info",
+              "edit:notifications": "Can ",
+              "view:business_documents": "Can view all documents of the business",
+              "view:calculator": "Can view all calculators of the business",
+              "edit:calculator": "Can edit all calculators of the business",
+              "delete:calculator": "Can delete all calculators of the business"
+            },
+            "tokenUrl": "/login/access-token"
+          }
+        }
+      }
+    }
+  }
+}
