@@ -5,49 +5,10 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/signup/": {
-      "post": {
-        "tags": ["auth"],
-        "summary": "Signup User",
-        "operationId": "signup_user_signup__post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateAccount"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/auth/login/access-token": {
       "post": {
         "tags": ["auth"],
-        "summary": "Login",
+        "summary": "Access token",
         "description": "OAuth2 compatible token login, get an access token for future requests",
         "operationId": "login_auth_login_access_token_post",
         "requestBody": {
