@@ -45,46 +45,6 @@
         }
       }
     },
-    "/auth/reset-password/": {
-      "post": {
-        "tags": ["auth"],
-        "summary": "Reset Password",
-        "description": "Reset password",
-        "operationId": "reset_password_auth_reset_password__post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_reset_password_auth_reset_password__post"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/auth/password-recovery/{email}": {
       "post": {
         "tags": ["auth"],
