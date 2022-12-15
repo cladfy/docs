@@ -45,46 +45,6 @@
         }
       }
     },
-    "/auth/password-recovery/{email}": {
-      "post": {
-        "tags": ["auth"],
-        "summary": "Recover Password",
-        "operationId": "recover_password_auth_password_recovery__email__post",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Email",
-              "type": "string"
-            },
-            "name": "email",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/auth/verify/{token}": {
       "post": {
         "tags": ["auth"],
@@ -1528,34 +1488,6 @@
         ]
       }
     },
-    "/businesses/members": {
-      "get": {
-        "tags": ["businesses"],
-        "summary": "Get Business Members",
-        "operationId": "getTeam",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Getteam",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/TeamResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      }
-    },
     "/businesses/members/{id}": {
       "delete": {
         "tags": ["businesses"],
@@ -1726,60 +1658,6 @@
         ]
       }
     },
-    "/businesses/invite-member": {
-      "post": {
-        "tags": ["businesses"],
-        "summary": "Post Invite Member",
-        "operationId": "inviteMember",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Email",
-              "type": "string"
-            },
-            "name": "email",
-            "in": "query"
-          },
-          {
-            "required": true,
-            "schema": {
-              "title": "Role",
-              "type": "string"
-            },
-            "name": "role",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      }
-    },
     "/businesses/stats": {
       "get": {
         "tags": ["businesses"],
@@ -1888,269 +1766,6 @@
         "security": [
           {
             "OAuth2PasswordBearer": ["upload:document"]
-          }
-        ]
-      }
-    },
-    "/documents/{id}/affordability": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Get Affordability",
-        "operationId": "getDocumentAffordability",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AffordabilityResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{id}/spending": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Spending Behaviour",
-        "operationId": "get_document_spending_behaviour",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{id}/loans": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Get Loans",
-        "operationId": "get_document_loans",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{id}/gambling": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Get Gambling",
-        "operationId": "get_document_gambling",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GamblingSummaryResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{id}/overdraft": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Get Overdraft",
-        "operationId": "get_document_overdraft",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OverdraftResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/": {
-      "get": {
-        "tags": ["documents"],
-        "summary": "Get Documents",
-        "operationId": "get_documents",
-        "parameters": [
-          {
-            "required": false,
-            "schema": {
-              "title": "Skip",
-              "type": "integer",
-              "default": 0
-            },
-            "name": "skip",
-            "in": "query"
-          },
-          {
-            "required": false,
-            "schema": {
-              "title": "Limit",
-              "type": "integer",
-              "default": 100
-            },
-            "name": "limit",
-            "in": "query"
-          },
-          {
-            "required": false,
-            "schema": {
-              "title": "Q",
-              "type": "string"
-            },
-            "name": "q",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocumentResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
           }
         ]
       }
@@ -2362,29 +1977,6 @@
         }
       }
     },
-    "/permissions": {
-      "get": {
-        "tags": ["permissions"],
-        "summary": "Get Permissions",
-        "operationId": "getPermissions",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Getpermissions",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Permissions"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/recharge_wallet": {
       "post": {
         "tags": ["wallet"],
@@ -2546,25 +2138,6 @@
   },
   "components": {
     "schemas": {
-      "AcceptInvitationRequest": {
-        "title": "AcceptInvitationRequest",
-        "required": ["first_name", "last_name", "password"],
-        "type": "object",
-        "properties": {
-          "first_name": {
-            "title": "First Name",
-            "type": "string"
-          },
-          "last_name": {
-            "title": "Last Name",
-            "type": "string"
-          },
-          "password": {
-            "title": "Password",
-            "type": "string"
-          }
-        }
-      },
       "Account": {
         "title": "Account",
         "required": ["name", "currency", "type", "accountNumber", "balance"],
@@ -2649,21 +2222,6 @@
           }
         }
       },
-      "App": {
-        "title": "App",
-        "required": ["name", "billing_enabled"],
-        "type": "object",
-        "properties": {
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "billing_enabled": {
-            "title": "Billing Enabled",
-            "type": "boolean"
-          }
-        }
-      },
       "Body_login_auth_login_access_token_post": {
         "title": "Body_login_auth_login_access_token_post",
         "required": ["username", "password"],
@@ -2693,21 +2251,6 @@
           },
           "client_secret": {
             "title": "Client Secret",
-            "type": "string"
-          }
-        }
-      },
-      "Body_reset_password_auth_reset_password__post": {
-        "title": "Body_reset_password_auth_reset_password__post",
-        "required": ["token", "new_password"],
-        "type": "object",
-        "properties": {
-          "token": {
-            "title": "Token",
-            "type": "string"
-          },
-          "new_password": {
-            "title": "New Password",
             "type": "string"
           }
         }
@@ -2950,21 +2493,6 @@
           },
           "averages": {
             "$ref": "#/components/schemas/CashflowAveragesResponse"
-          }
-        }
-      },
-      "ChangePasswordRequest": {
-        "title": "ChangePasswordRequest",
-        "required": ["new_password", "current_password"],
-        "type": "object",
-        "properties": {
-          "new_password": {
-            "title": "New Password",
-            "type": "string"
-          },
-          "current_password": {
-            "title": "Current Password",
-            "type": "string"
           }
         }
       },
@@ -3347,84 +2875,6 @@
           "password": {
             "title": "Password",
             "type": "string"
-          }
-        }
-      },
-      "DocumentLoanSummary": {
-        "title": "DocumentLoanSummary",
-        "required": [
-          "lender",
-          "amount_borrowed",
-          "amount_repaid",
-          "times_taken",
-          "times_repaid"
-        ],
-        "type": "object",
-        "properties": {
-          "lender": {
-            "title": "Lender",
-            "type": "string"
-          },
-          "amount_borrowed": {
-            "title": "Amount Borrowed",
-            "type": "number"
-          },
-          "amount_repaid": {
-            "title": "Amount Repaid",
-            "type": "number"
-          },
-          "times_taken": {
-            "title": "Times Taken",
-            "type": "integer"
-          },
-          "times_repaid": {
-            "title": "Times Repaid",
-            "type": "integer"
-          }
-        }
-      },
-      "DocumentLoanSummaryResponse": {
-        "title": "DocumentLoanSummaryResponse",
-        "required": ["loans_summary", "summary"],
-        "type": "object",
-        "properties": {
-          "loans_summary": {
-            "title": "Loans Summary",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DocumentLoanSummary"
-            }
-          },
-          "summary": {
-            "$ref": "#/components/schemas/DocumentLoansSummary"
-          }
-        }
-      },
-      "DocumentLoansSummary": {
-        "title": "DocumentLoansSummary",
-        "required": [
-          "number_of_loans",
-          "amount_borrowed",
-          "amount_repaid",
-          "lenders"
-        ],
-        "type": "object",
-        "properties": {
-          "number_of_loans": {
-            "title": "Number Of Loans",
-            "type": "integer"
-          },
-          "amount_borrowed": {
-            "title": "Amount Borrowed",
-            "type": "number"
-          },
-          "amount_repaid": {
-            "title": "Amount Repaid",
-            "type": "number"
-          },
-          "lenders": {
-            "title": "Lenders",
-            "type": "integer"
           }
         }
       },
@@ -3943,48 +3393,6 @@
           }
         }
       },
-      "TeamResponse": {
-        "title": "TeamResponse",
-        "required": ["id", "email", "role", "fullName"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "email": {
-            "title": "Email",
-            "type": "string"
-          },
-          "firstName": {
-            "title": "Firstname",
-            "type": "string"
-          },
-          "role": {
-            "title": "Role",
-            "type": "string"
-          },
-          "currentRole": {
-            "$ref": "#/components/schemas/RoleResponse"
-          },
-          "fullName": {
-            "title": "Fullname",
-            "type": "string"
-          },
-          "lastName": {
-            "title": "Lastname",
-            "type": "string"
-          },
-          "lastLogInAt": {
-            "title": "Lastloginat",
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "$ref": "#/components/schemas/UserStatus"
-          }
-        }
-      },
       "Token": {
         "title": "Token",
         "required": ["access_token", "token_type"],
@@ -4043,17 +3451,6 @@
           "fuel"
         ],
         "description": "An enumeration."
-      },
-      "UpdateRole": {
-        "title": "UpdateRole",
-        "required": ["id"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          }
-        }
       },
       "UploadedFile": {
         "title": "UploadedFile",
