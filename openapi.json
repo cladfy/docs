@@ -2164,9 +2164,6 @@
                      "$ref":"#/components/schemas/AccountReponseSchema"
                   }
                },
-               "created_by":{
-                  "$ref":"#/components/schemas/UserResponse"
-               },
                "transactions_duration":{
                   "title":"Transactions Duration",
                   "type":"string"
@@ -2415,9 +2412,6 @@
                "account_id":{
                   "title":"Account Id",
                   "type":"integer"
-               },
-               "created_by":{
-                  "$ref":"#/components/schemas/UserResponse"
                },
                "type":{
                   "title":"Type",
