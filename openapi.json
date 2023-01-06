@@ -5,186 +5,13 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/auth/login/access-token": {
-      "post": {
-        "tags": ["auth"],
-        "summary": "Access token",
-        "description": "OAuth2 compatible token login, get an access token for future requests",
-        "operationId": "login_auth_login_access_token_post",
-        "requestBody": {
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_login_auth_login_access_token_post"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Token"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/verify/{token}": {
-      "post": {
-        "tags": ["auth"],
-        "summary": "Verify Account",
-        "operationId": "verifyToken",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Token",
-              "type": "string"
-            },
-            "name": "token",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/me": {
-      "get": {
-        "tags": ["users"],
-        "summary": "Get Logged In User",
-        "operationId": "getMe",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
-      }
-    }, 
-    "/users/calculators": {
-      "get": {
-        "tags": ["users"],
-        "summary": "Get Business Calculators",
-        "operationId": "get_business_calculators_users_calculators_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Get Business Calculators Users Calculators Get",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CalculatorResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
-      }
-    },
-    "/users/switch-business": {
-      "post": {
-        "tags": ["users"],
-        "summary": "Switch Business",
-        "operationId": "switchBusiness",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SwitchBusiness"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
-      }
-    },
     "/clients/": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Clients",
+        "description": "This endpoint allows developers to Fetch all clients.
+                        The data retuned include the total number of clients, and an array of clients with a forever unique id of each.
+                        Each client in the array is similar to the response of /clients/{id} endpoint",
         "operationId": "get_clients_clients__get",
         "parameters": [
           {
@@ -246,7 +73,7 @@
         ]
       },
       "post": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Create Client",
         "operationId": "create_client_clients__post",
         "requestBody": {
@@ -290,8 +117,10 @@
     },
     "/clients/{id}": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client",
+        "tags": ["Clients"],
+        "summary": "Get one specific Client",
+        "description": "This uses a unique identifier i.e is the ID.
+        The client ID is required and should be provided either in the header or as part of a request body.",
         "operationId": "get_client_clients__id__get",
         "parameters": [
           {
@@ -348,8 +177,10 @@
     },
     "/clients/{id}/documents": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Client Documents",
+        "tags": ["Clients"],
+        "summary": "Get all Documents of a Client",
+        "description": "Calling this endpoint requires a client Id. 
+        It then returns all documents that are associated with the specified client",
         "operationId": "client_documents_clients__id__documents_get",
         "parameters": [
           {
@@ -410,8 +241,9 @@
     },
     "/clients/{id}/link-mono": {
       "post": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Link Mono",
+        "description": "This establishes a link of the already existing client to the Mono system",
         "operationId": "link_mono_clients__id__link_mono_post",
         "parameters": [
           {
@@ -460,8 +292,11 @@
     },
     "/clients/{id}/create-link": {
       "post": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Create Link",
+        "description": "Send a request to the /clients/{id}/create-link endpoint to generate a unique link.
+        This new link can be used to query data from Mono.
+        This is an optional endpoint used when clients choose to provide their statements as e-statements rather than upload files directly",
         "operationId": "createMonoLink",
         "parameters": [
           {
@@ -505,8 +340,10 @@
     },
     "/clients/{id}/email-link": {
       "post": {
-        "tags": ["clients"],
-        "summary": "Email Link To Client",
+        "tags": ["Clients"],
+        "summary": "Email a Mono Link To Client",
+        "description": "You can use this endpoint to automatically send a valink link-to-mono link to an alredy created client.
+        This requirs that (i.e only works) the client's email is provided when a client account was being created",
         "operationId": "emailLinkToClient",
         "parameters": [
           {
@@ -560,8 +397,10 @@
     },
     "/clients/link/{id}": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Link",
+        "description": "Calling this endpoint by providing a specific client ID returns an already generated valid link-to-mono link.
+        This endpoint will return a valid link on after the /clients/{id}/create-link was Successful",
         "operationId": "getLink",
         "parameters": [
           {
@@ -600,8 +439,11 @@
     },
     "/clients/{id}/linked-accounts": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Client Linked Accounts",
+        "tags": ["Clients"],
+        "summary": "Get all Linked Accounts of a Client",
+        "description": "Send a request to this endpoint to get detailed information on categories returned by Plaid.
+        This endpoint requires a unique client ID. Together with the client's personal information submitted during client creation;
+        it also returns an array of all accounts linked to the client. These accounts are fetched from all documents uploaded and every account linked via Mono",
         "operationId": "clientLinkedAccounts",
         "parameters": [
           {
@@ -662,8 +504,11 @@
     },
     "/clients/{id}/summary": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Client Summary",
+        "tags": ["Clients"],
+        "summary": "Get Client Summary",
+        "description": "Retrieve a summary of an a client's financial information. It aggregates and sums up data from all linked accounts.
+        Cladfy begins preparing transactions data when the Item is created, but the process can take anywhere from a few seconds to several minutes to complete, 
+        depending on the number of transactions available.",
         "operationId": "clientSummary",
         "parameters": [
           {
@@ -729,8 +574,14 @@
     },
     "/clients/{id}/transactions": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Client Transaction Handler",
+        "description": "Retrieve and refresh 1, 3, 6, 12 or 24 months of historical transaction data, including type, amount, balanece, category information...
+        Transaction data is standardized across financial institutions.
+        Similarly, account data is standardized and returned with a clean name, number, balance, and other meta information where available.
+        Transactions are returned in reverse-chronological order, and the sequence of transaction ordering is stable and will not shift. 
+        Transactions are not immutable and can also be removed altogether by the institution; a removed transaction will no longer appear here /clients/{id}/transactions.
+        Note that e-statements data may not be immediately available to /clients/{id}/transactions. Mono will begin to prepare transactions data upon Client link.",
         "operationId": "clientTransactions",
         "parameters": [
           {
@@ -778,8 +629,11 @@
     },
     "/clients/{id}/cashflow": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Client Cashflow Handler",
+        "description": "This endpoint returns aggregated data from all and each account. 
+        The financial data is summarised and grouped as either debit, credit, balance, averages.
+        The number of transactions or frequency of each group is further grouped on a Daily, wekly and monthly basis",
         "operationId": "clientCashflow",
         "parameters": [
           {
@@ -832,8 +686,11 @@
     },
     "/clients/{id}/spending": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Client Spending Handler",
+        "description": "Endpoint to fetch summaries of transactions grouped per category.
+        Cladfy classifies every transaction into a set o  ever increasing number of categories.
+        With this Classificaion, you get a summary of the client's spending habits such as goceries, school fees,governement services etc",
         "operationId": "clientSpending",
         "parameters": [
           {
@@ -884,8 +741,11 @@
     },
     "/clients/{id}/loans": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client Loans Handler",
+        "tags": ["Clients"],
+        "summary": "Get Loans the Client has taken",
+        "description": "This returns a summary i.e Amount borrowed, Number of times a loan was borrowed, the total amount repayed, number of times the loan was paid.
+        Number of individual lenders, time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan, account and 
+        an aggregation of all loans and accounts",
         "operationId": "clientLoans",
         "parameters": [
           {
@@ -938,8 +798,12 @@
     },
     "/clients/{id}/savings": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client Savings Handler",
+        "tags": ["Clients"],
+        "summary": "Get Client money Savings data",
+        "description": "This returns a summary i.e Amount borrowed, Number of times a has deposited into a savings account, 
+        the total  amount deposited, number of times the deposits were done, Total amount withdrawn, number of withdrawals.
+        Number of individual savings platforms, time taken from saving and fully withdrawing, time interval between each deposits,
+        average deposit and withdrawal time for each savings, account and an aggregation of all loans and accounts",
         "operationId": "clientSavings",
         "parameters": [
           {
@@ -992,8 +856,11 @@
     },
     "/clients/{id}/gambling": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client Gambling Handler",
+        "tags": ["Clients"],
+        "summary": "Get Client Gambling and Betting",
+        "description": "This returns a summary i.e Amount gambled, Number of times a bet was placed, the amount won, number of times the client placed a bet.
+        Number of individual gambling platforms, time taken from borrowing and placing a bet, time interval between placing bets, average amount gambled and won, per account and 
+        an aggregation of all accounts",
         "operationId": "get_client_gambling",
         "parameters": [
           {
@@ -1046,8 +913,11 @@
     },
     "/clients/{id}/overdraft": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client Overdraft",
+        "tags": ["Clients"],
+        "summary": "Get Client Overdraft Credit access",
+        "description": "This endpoint returns a summary i.e Overdraft amount borrowed, Number of times a loan was borrowed, the amount repayed, number of times the loan was reaid.
+        Time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan per account and 
+        an aggregation of all loans and accounts",
         "operationId": "get_client_overdraft",
         "parameters": [
           {
@@ -1100,8 +970,10 @@
     },
     "/clients/{id}/affordability": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Client Affordability Handler",
+        "tags": ["Clients"],
+        "summary": "Get a Client Affordability amount",
+        "description": "Calling this endpoint returns an amount in the account-specified currency that a client can set aside DAILY to repay a loan. It is the affordability factor; a Debt Burden Ratio (DBR), 
+        which is calculated as a ratio of the total monthly debt payments that the customer is making against the customer's total income from the last Three months. A lower DBR corresponds to a high affordability",
         "operationId": "get_client_affordability",
         "parameters": [
           {
@@ -1154,8 +1026,10 @@
     },
     "/clients/{id}/document_polling": {
       "get": {
-        "tags": ["clients"],
-        "summary": "Get Document Polling",
+        "tags": ["Clients"],
+        "summary": "Get Document analysis status",
+        "description": "This fetches the analysis status of the uploaded document.
+        It shows whether athe analysis was Successful, Still ongoing, or Failed,",
         "operationId": "documentPolling",
         "parameters": [
           {
@@ -1199,8 +1073,12 @@
     },
     "/clients/{id}/estimate_loan": {
       "post": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Estimate Loan",
+        "description": "This endpoint returns an amount in the account-specified currency that a client can afford to repay comfrotably.
+        Cladfy calculate using the affordability ratio, clients income, spending and the variables from a specific calculator.
+        The calculator variables must be provided when calling this endpoint",
+        "operationId": "get_client_affordability",
         "operationId": "esimateClientLoan",
         "parameters": [
           {
@@ -1254,7 +1132,7 @@
     },
     "/clients/{id}/trends": {
       "get": {
-        "tags": ["clients"],
+        "tags": ["Clients"],
         "summary": "Get Client Trends",
         "description": "This resource represents the known trends on the client transactions. This currently only supports mpesa transactions.",
         "operationId": "clientTrends",
@@ -1324,6 +1202,7 @@
       "get": {
         "tags": ["businesses"],
         "summary": "Get Business Calculcators",
+        "description": "Fetch all calculators that are available for your business account",
         "operationId": "getCalculators",
         "responses": {
           "200": {
@@ -1443,249 +1322,14 @@
             "OAuth2PasswordBearer": ["edit:calculator"]
           }
         ]
-      },
-      "delete": {
-        "tags": ["businesses"],
-        "summary": "Delete A Calculator",
-        "operationId": "deleteCalculator",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:calculator"]
-          }
-        ]
-      }
-    },
-    "/businesses/members/{id}": {
-      "delete": {
-        "tags": ["businesses"],
-        "summary": "Delete A Member",
-        "operationId": "deleteMember",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Id",
-              "type": "integer"
-            },
-            "name": "id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      }
-    },
-    "/businesses/roles": {
-      "get": {
-        "tags": ["businesses"],
-        "summary": "Roles",
-        "operationId": "getRoles",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Getroles",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RoleResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      },
-      "post": {
-        "tags": ["businesses"],
-        "summary": "Create Role Handler",
-        "operationId": "createRole",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RoleCreate"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RoleResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      }
-    },
-    "/businesses/members/{member_id}/role": {
-      "patch": {
-        "tags": ["businesses"],
-        "summary": "Upadate Member Role",
-        "operationId": "updateRole",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Member Id",
-              "type": "integer"
-            },
-            "name": "member_id",
-            "in": "path"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateRole"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["edit:team"]
-          }
-        ]
-      }
-    },
-    "/businesses/stats": {
-      "get": {
-        "tags": ["businesses"],
-        "summary": "Get Business Stats",
-        "operationId": "business_stats",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BusinessStats"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
       }
     },
     "/documents/create_document": {
       "post": {
-        "tags": ["documents"],
+        "tags": ["Documents"],
         "summary": "Create Document",
+        "description": "This endpoint allows you to create a document record in association with a specific client.
+        After a successful creation, the document will be ready for analysis",
         "operationId": "create_document_documents_create_document_post",
         "requestBody": {
           "content": {
@@ -1728,8 +1372,9 @@
     },
     "/documents/upload": {
       "post": {
-        "tags": ["documents"],
-        "summary": "Upload",
+        "tags": ["Documents"],
+        "summary": "Upload a document",
+        "description": "Use this endpoint to upload a document",
         "operationId": "upload_documents_upload_post",
         "requestBody": {
           "content": {
@@ -1772,8 +1417,9 @@
     },
     "/documents/retry/{id}": {
       "post": {
-        "tags": ["documents"],
+        "tags": ["Documents"],
         "summary": "Retry Analyzing Document",
+        "description": "Request another attempt to analyze a failed document analysis",
         "operationId": "retry_analyzing_document",
         "parameters": [
           {
@@ -1826,8 +1472,9 @@
     },
     "/documents/{id}/status": {
       "get": {
-        "tags": ["documents"],
+        "tags": ["Documents"],
         "summary": "Get Document Polling",
+        "description": "",
         "operationId": "checkAnalyzing",
         "parameters": [
           {
@@ -1977,149 +1624,10 @@
         }
       }
     },
-    "/recharge_wallet": {
-      "post": {
-        "tags": ["wallet"],
-        "summary": "Recharge Wallet",
-        "operationId": "recharge_wallet",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Recharge"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Msg"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
-      }
-    },
-    "/wallet": {
-      "get": {
-        "tags": ["wallet"],
-        "summary": "Wallet Balance",
-        "operationId": "wallet",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Wallet"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["view:billing"]
-          }
-        ]
-      }
-    },
-    "/wallet/transactions": {
-      "get": {
-        "tags": ["wallet"],
-        "summary": "Wallet Transactions",
-        "operationId": "wallet_transactions",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Wallet Transactions",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WalletTransaction"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["view:billing"]
-          }
-        ]
-      }
-    },
-    "/payment/history": {
-      "get": {
-        "tags": ["wallet"],
-        "summary": "Payment History",
-        "operationId": "walletHistory",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Wallethistory",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WalletHistory"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": ["view:billing"]
-          }
-        ]
-      }
-    },
-    "/": {
-      "get": {
-        "summary": "Hello",
-        "operationId": "hello__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
     "/ping": {
       "get": {
-        "summary": "Ping",
+        "summary": "is the Cladfy API up?",
+        "description": "Call this endpoint to see the current accessibility status of the Cladfy API",
         "operationId": "ping",
         "responses": {
           "200": {
@@ -2222,39 +1730,6 @@
           }
         }
       },
-      "Body_login_auth_login_access_token_post": {
-        "title": "Body_login_auth_login_access_token_post",
-        "required": ["username", "password"],
-        "type": "object",
-        "properties": {
-          "grant_type": {
-            "title": "Grant Type",
-            "pattern": "password",
-            "type": "string"
-          },
-          "username": {
-            "title": "Username",
-            "type": "string"
-          },
-          "password": {
-            "title": "Password",
-            "type": "string"
-          },
-          "scope": {
-            "title": "Scope",
-            "type": "string",
-            "default": ""
-          },
-          "client_id": {
-            "title": "Client Id",
-            "type": "string"
-          },
-          "client_secret": {
-            "title": "Client Secret",
-            "type": "string"
-          }
-        }
-      },
       "Body_upload_documents_upload_post": {
         "title": "Body_upload_documents_upload_post",
         "required": ["fileobject"],
@@ -2264,48 +1739,6 @@
             "title": "Fileobject",
             "type": "string",
             "format": "binary"
-          }
-        }
-      },
-      "BusinessResponse": {
-        "title": "BusinessResponse",
-        "required": ["id", "name", "onwerId"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "integer"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "onwerId": {
-            "title": "Onwerid",
-            "type": "integer"
-          },
-          "balance": {
-            "title": "Balance",
-            "type": "integer"
-          }
-        }
-      },
-      "BusinessStats": {
-        "title": "BusinessStats",
-        "required": ["clients", "documents", "accounts"],
-        "type": "object",
-        "properties": {
-          "clients": {
-            "title": "Clients",
-            "type": "integer"
-          },
-          "documents": {
-            "title": "Documents",
-            "type": "integer"
-          },
-          "accounts": {
-            "title": "Accounts",
-            "type": "integer"
           }
         }
       },
@@ -3032,29 +2465,6 @@
           }
         }
       },
-      "InvitationResponse": {
-        "title": "InvitationResponse",
-        "required": ["id", "email", "businessName"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "email": {
-            "title": "Email",
-            "type": "string"
-          },
-          "businessName": {
-            "title": "Businessname",
-            "type": "string"
-          },
-          "firstTime": {
-            "title": "Firsttime",
-            "type": "boolean"
-          }
-        }
-      },
       "LinkEmail": {
         "title": "LinkEmail",
         "required": ["link"],
@@ -3138,25 +2548,6 @@
           }
         }
       },
-      "NewCalculator": {
-        "title": "NewCalculator",
-        "required": ["name", "interest_rate", "duration"],
-        "type": "object",
-        "properties": {
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "interest_rate": {
-            "title": "Interest Rate",
-            "type": "number"
-          },
-          "duration": {
-            "title": "Duration",
-            "type": "integer"
-          }
-        }
-      },
       "OverdraftOverview": {
         "title": "OverdraftOverview",
         "required": [
@@ -3221,25 +2612,6 @@
           }
         }
       },
-      "Permissions": {
-        "title": "Permissions",
-        "required": ["name", "key", "description"],
-        "type": "object",
-        "properties": {
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "key": {
-            "title": "Key",
-            "type": "string"
-          },
-          "description": {
-            "title": "Description",
-            "type": "string"
-          }
-        }
-      },
       "Ping": {
         "title": "Ping",
         "required": ["app"],
@@ -3247,69 +2619,6 @@
         "properties": {
           "app": {
             "$ref": "#/components/schemas/App"
-          }
-        }
-      },
-      "Recharge": {
-        "title": "Recharge",
-        "required": ["phone", "amount"],
-        "type": "object",
-        "properties": {
-          "phone": {
-            "title": "Phone",
-            "type": "string"
-          },
-          "amount": {
-            "title": "Amount",
-            "type": "integer"
-          }
-        }
-      },
-      "RoleCreate": {
-        "title": "RoleCreate",
-        "required": ["name", "description", "permissions"],
-        "type": "object",
-        "properties": {
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "description": {
-            "title": "Description",
-            "type": "string"
-          },
-          "permissions": {
-            "title": "Permissions",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "RoleResponse": {
-        "title": "RoleResponse",
-        "required": ["id", "name"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "description": {
-            "title": "Description",
-            "type": "string"
-          },
-          "permissions": {
-            "title": "Permissions",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },
@@ -3382,32 +2691,6 @@
           }
         }
       },
-      "SwitchBusiness": {
-        "title": "SwitchBusiness",
-        "required": ["business_id"],
-        "type": "object",
-        "properties": {
-          "business_id": {
-            "title": "Business Id",
-            "type": "integer"
-          }
-        }
-      },
-      "Token": {
-        "title": "Token",
-        "required": ["access_token", "token_type"],
-        "type": "object",
-        "properties": {
-          "access_token": {
-            "title": "Access Token",
-            "type": "string"
-          },
-          "token_type": {
-            "title": "Token Type",
-            "type": "string"
-          }
-        }
-      },
       "TransactionResponse": {
         "title": "TransactionResponse",
         "required": ["id", "amount", "narration", "date"],
@@ -3466,64 +2749,7 @@
             "type": "string"
           }
         }
-      },
-      "UserResponse": {
-        "title": "UserResponse",
-        "required": ["email", "id", "first_name"],
-        "type": "object",
-        "properties": {
-          "email": {
-            "title": "Email",
-            "type": "string"
-          },
-          "phone_number": {
-            "title": "Phone Number",
-            "type": "string"
-          },
-          "id": {
-            "title": "Id",
-            "type": "string"
-          },
-          "last_name": {
-            "title": "Last Name",
-            "type": "string"
-          },
-          "first_name": {
-            "title": "First Name",
-            "type": "string"
-          },
-          "is_email_verified": {
-            "title": "Is Email Verified",
-            "type": "boolean"
-          },
-          "preferred_name": {
-            "title": "Preferred Name",
-            "type": "string"
-          },
-          "role": {
-            "$ref": "#/components/schemas/RoleResponse"
-          },
-          "currentBusiness": {
-            "$ref": "#/components/schemas/BusinessResponse"
-          },
-          "businesses": {
-            "title": "Businesses",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BusinessResponse"
-            }
-          },
-          "full_name": {
-            "title": "Full Name",
-            "type": "string"
-          }
-        }
-      },
-      "UserStatus": {
-        "title": "UserStatus",
-        "enum": [1, 2],
-        "description": "An enumeration."
-      },
+      }
       "ValidationError": {
         "title": "ValidationError",
         "required": ["loc", "msg", "type"],
@@ -3553,85 +2779,6 @@
           }
         }
       },
-      "Wallet": {
-        "title": "Wallet",
-        "required": ["balance"],
-        "type": "object",
-        "properties": {
-          "balance": {
-            "title": "Balance",
-            "type": "integer"
-          }
-        }
-      },
-      "WalletHistory": {
-        "title": "WalletHistory",
-        "required": ["amount", "status", "narration", "updated_at"],
-        "type": "object",
-        "properties": {
-          "amount": {
-            "title": "Amount",
-            "type": "integer"
-          },
-          "status": {
-            "title": "Status",
-            "type": "string"
-          },
-          "narration": {
-            "title": "Narration",
-            "type": "string"
-          },
-          "updated_at": {
-            "title": "Updated At",
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "WalletTransaction": {
-        "title": "WalletTransaction",
-        "required": [
-          "amount",
-          "narration",
-          "id",
-          "created_at",
-          "updated_at",
-          "type"
-        ],
-        "type": "object",
-        "properties": {
-          "amount": {
-            "title": "Amount",
-            "type": "integer"
-          },
-          "narration": {
-            "title": "Narration",
-            "type": "string"
-          },
-          "id": {
-            "title": "Id",
-            "type": "integer"
-          },
-          "created_at": {
-            "title": "Created At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "title": "Updated At",
-            "type": "string",
-            "format": "date-time"
-          },
-          "type": {
-            "$ref": "#/components/schemas/WalletTransactionType"
-          }
-        }
-      },
-      "WalletTransactionType": {
-        "title": "WalletTransactionType",
-        "enum": [1, 2],
-        "description": "An enumeration."
-      }
     },
     "securitySchemes": {
       "OAuth2PasswordBearer": {
@@ -3645,14 +2792,9 @@
               "edit:client": "Perform update functions on customers",
               "delete:client": "Perform update functions on customers",
               "view:client": "Can view client data",
-              "edit:team": "User would be able to edit members and roles",
               "upload:document": "User would be able to upload a client document",
-              "view:billing": "Can billing info",
-              "edit:notifications": "Can ",
               "view:business_documents": "Can view all documents of the business",
               "view:calculator": "Can view all calculators of the business",
-              "edit:calculator": "Can edit all calculators of the business",
-              "delete:calculator": "Can delete all calculators of the business"
             },
             "tokenUrl": "/login/access-token"
           }
