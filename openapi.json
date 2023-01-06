@@ -2792,6 +2792,84 @@
                }
             }
          },
+         "DocumentLoanSummary": {
+        "title": "DocumentLoanSummary",
+        "required": [
+          "lender",
+          "amount_borrowed",
+          "amount_repaid",
+          "times_taken",
+          "times_repaid"
+        ],
+        "type": "object",
+        "properties": {
+          "lender": {
+            "title": "Lender",
+            "type": "string"
+          },
+          "amount_borrowed": {
+            "title": "Amount Borrowed",
+            "type": "number"
+          },
+          "amount_repaid": {
+            "title": "Amount Repaid",
+            "type": "number"
+          },
+          "times_taken": {
+            "title": "Times Taken",
+            "type": "integer"
+          },
+          "times_repaid": {
+            "title": "Times Repaid",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentLoanSummaryResponse": {
+        "title": "DocumentLoanSummaryResponse",
+        "required": ["loans_summary", "summary"],
+        "type": "object",
+        "properties": {
+          "loans_summary": {
+            "title": "Loans Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentLoanSummary"
+            }
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DocumentLoansSummary"
+          }
+        }
+      },
+      "DocumentLoansSummary": {
+        "title": "DocumentLoansSummary",
+        "required": [
+          "number_of_loans",
+          "amount_borrowed",
+          "amount_repaid",
+          "lenders"
+        ],
+        "type": "object",
+        "properties": {
+          "number_of_loans": {
+            "title": "Number Of Loans",
+            "type": "integer"
+          },
+          "amount_borrowed": {
+            "title": "Amount Borrowed",
+            "type": "number"
+          },
+          "amount_repaid": {
+            "title": "Amount Repaid",
+            "type": "number"
+          },
+          "lenders": {
+            "title": "Lenders",
+            "type": "integer"
+          }
+        }
+      },
          "SavingSummary":{
             "title":"SavingSummary",
             "required":[
