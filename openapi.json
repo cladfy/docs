@@ -1602,26 +1602,7 @@
                }
             }
          }
-      },
-      "/ping":{
-         "get":{
-            "summary":"is the Cladfy API up?",
-            "description":"Call this endpoint to see the current accessibility status of the Cladfy API",
-            "operationId":"ping",
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Ping"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      }
+      } 
    },
    "components":{
       "schemas":{
@@ -2674,19 +2655,7 @@
                   "type":"integer"
                }
             }
-         },
-         "Ping":{
-            "title":"Ping",
-            "required":[
-               "app"
-            ],
-            "type":"object",
-            "properties":{
-               "app":{
-                  "$ref":"#/components/schemas/App"
-               }
-            }
-         },
+         }, 
          "DocumentLoanSummary": {
         "title": "DocumentLoanSummary",
         "required": [
