@@ -2052,7 +2052,7 @@
                "total_in",
                "total_out",
                "loans",
-               "avg_balance"
+               "zero_balance_rate_percentage"
             ],
             "type":"object",
             "properties":{
@@ -2068,8 +2068,8 @@
                   "title":"Loans",
                   "type":"integer"
                },
-               "avg_balance":{
-                  "title":"Avg Balance",
+               "zero_balance_rate_percentage":{
+                  "title":"Zero Balance Rate",
                   "type":"number"
                },
                "largest_in":{
