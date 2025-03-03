@@ -2935,7 +2935,51 @@
                   "type":"string"
                }
             }
-         }
+         },
+      "BankSchema": {
+        "title": "BankSchema",
+        "required": [
+          "code",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        }
+      },
+      "Body_check_modification_by_url": {
+        "title": "Body_check_modification_by_url",
+        "required": [
+          "file_url"
+        ],
+        "type": "object",
+        "properties": {
+          "file_url": {
+            "title": "File Url",
+            "type": "string"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "document_provider": {
+            "title": "Document Provider",
+            "type": "string"
+          }
+        }
+      }
       },
       "securitySchemes":{
          "OAuth2PasswordBearer":{
