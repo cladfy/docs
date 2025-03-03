@@ -2344,12 +2344,7 @@
                "password":{
                   "title":"Password",
                   "type":"string"
-               },
-               "provider": {
-                 "title": "Provider",
-                 "type": "string"
                }
-             }
             }
          },
          "DocumentPolling":{
@@ -2941,29 +2936,29 @@
                }
             }
          },
-      "BankSchema": {
-        "title": "BankSchema",
-        "required": [
-          "code",
-          "name",
-          "description"
-        ],
-        "type": "object",
-        "properties": {
-          "code": {
-            "title": "Code",
-            "type": "string"
-          },
-          "name": {
-            "title": "Name",
-            "type": "string"
-          },
-          "description": {
-            "title": "Description",
-            "type": "string"
-          }
-        }
-      },
+         "BankSchema": {
+           "title": "BankSchema",
+           "required": [
+             "code",
+             "name",
+             "description"
+           ],
+           "type": "object",
+           "properties": {
+             "code": {
+               "title": "Code",
+               "type": "string"
+             },
+             "name": {
+               "title": "Name",
+               "type": "string"
+             },
+             "description": {
+               "title": "Description",
+               "type": "string"
+             }
+           }
+         },
       "Body_check_modification_by_url": {
         "title": "Body_check_modification_by_url",
         "required": [
@@ -2984,6 +2979,7 @@
             "type": "string"
           }
         }
+      }
       },
       "securitySchemes":{
          "OAuth2PasswordBearer":{
