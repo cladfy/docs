@@ -2983,7 +2983,7 @@
             "title": "Document Provider",
             "type": "string"
           }
-         }
+        }
       },
       "securitySchemes":{
          "OAuth2PasswordBearer":{
