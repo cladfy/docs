@@ -2344,7 +2344,12 @@
                "password":{
                   "title":"Password",
                   "type":"string"
+               },
+               "provider": {
+                 "title": "Provider",
+                 "type": "string"
                }
+             }
             }
          },
          "DocumentPolling":{
