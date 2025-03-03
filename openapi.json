@@ -2984,7 +2984,6 @@
             "type": "string"
           }
         }
-      }
       },
       "securitySchemes":{
          "OAuth2PasswordBearer":{
