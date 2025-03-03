@@ -1602,8 +1602,31 @@
                }
             }
          }
-      } 
-   },
+      },
+      "/banks/": {
+      "get": {
+        "summary": "Get Banks",
+        "description": "Get a list of supported banks with their codes and descriptions.",
+        "operationId": "get_banks",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Banks",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankSchema"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    } 
+    },
    "components":{
       "schemas":{
          "Account":{
