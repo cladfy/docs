@@ -1278,56 +1278,7 @@
             ]
          }
       },
-      "/documents/create_document":{
-         "post":{
-            "tags":[
-               "Documents"
-            ],
-            "summary":"Create Document",
-            "description":"This endpoint allows you to create a document record in association with a specific client. After a successful creation, the document will be ready for analysis",
-            "operationId":"create_document_documents_create_document_post",
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/DocumentCreate"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Document"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "upload:document"
-                  ]
-               }
-            ]
-         }
-      },
-      "/documents/upload":{
+      "/documents":{
          "post":{
             "tags":[
                "Documents"
