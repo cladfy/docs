@@ -1400,6 +1400,79 @@
             ]
          }
       },
+      "/clients/{id}/all_documents": {
+         "get": {
+            "tags": [
+               "Documents"
+            ],
+            "summary": "Get All Client Documents",
+            "description": "Retrieves all documents associated with a client, including metadata such as type, status, creation date, and processing information.",
+            "operationId": "getAllClientDocuments",
+            "parameters": [
+               {
+                  "required": true,
+                  "schema": {
+                     "title": "Id",
+                     "type": "integer"
+                  },
+                  "name": "id",
+                  "in": "path"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/components/schemas/Document"
+                           }
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Client Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               },
+               "403": {
+                  "description": "Not authorized to access this client",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               },
+               "422": {
+                  "description": "Validation Error",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
+                     }
+                  }
+               }
+            },
+            "security": [
+               {
+                  "OAuth2PasswordBearer": [
+                     "view:client"
+                  ]
+               }
+            ]
+         }
+      },
       "/businesses/calculators":{
          "get":{
             "tags":[
