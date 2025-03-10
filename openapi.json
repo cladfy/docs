@@ -1443,7 +1443,7 @@
       "/business/clients": {
          "get": {
             "tags": [
-               "business"
+               "businesses"
             ],
             "summary": "Get All Business Clients",
             "description": "Retrieve all clients associated with the authenticated business.",
