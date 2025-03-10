@@ -1,1757 +1,1720 @@
 {
-   "openapi":"3.0.2",
-   "info":{
-      "title":"Cladfy",
-      "version":"1.0.0"
-   },
-   "paths":{
-      "/clients/":{
-         "post":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Create Client",
-            "operationId":"create_client_clients__post",
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/CreateClient"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/ClientResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "edit:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get one specific Client",
-            "description":"This uses a unique identifier i.e is the ID.The client ID is required and should be provided either in the header or as part of a request body.",
-            "operationId":"get_client_clients__id__get",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Item requested by ID",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/ClientResponse"
-                        },
-                        "example":{
-                           "id":"bar"
-                        }
-                     }
-                  }
-               },
-               "404":{
-                  "description":"The item was not found",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/documents":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get all Documents of a Client",
-            "description":"Calling this endpoint requires a client Id.It then returns all documents that are associated with the specified client",
-            "operationId":"client_documents_clients__id__documents_get",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Document requested by ID",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "title":"Response 200 Client Documents Clients  Id  Documents Get",
-                           "type":"array",
-                           "items":{
-                              "$ref":"#/components/schemas/Document"
-                           }
-                        },
-                        "example":{
-                           "id":"bar"
-                        }
-                     }
-                  }
-               },
-               "404":{
-                  "description":"The item was not found",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/link-mono":{
-         "post":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Link Mono",
-            "description":"This establishes a link of the already existing client to the Mono system",
-            "operationId":"link_mono_clients__id__link_mono_post",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/LinkMono"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/LinkMono"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Cladfy",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/clients/": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Create Client",
+        "operationId": "create_client_clients__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateClient"
+              }
             }
-         }
-      },
-      "/clients/{id}/create-link":{
-         "post":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Create Link",
-            "description":"Send a request to the /clients/{id}/create-link endpoint to generate a unique link. This new link can be used to query data from Mono. This is an optional endpoint used when clients choose to provide their statements as e-statements rather than upload files directly",
-            "operationId":"createMonoLink",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/CreateLinkReponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "edit:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/email-link":{
-         "post":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Email a Mono Link To Client",
-            "description":"You can use this endpoint to automatically send a valink link-to-mono link to an alredy created client. This requirs that (i.e only works) the client's email is provided when a client account was being created",
-            "operationId":"emailLinkToClient",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/LinkEmail"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "edit:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/link/{id}":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Link",
-            "description":"Calling this endpoint by providing a specific client ID returns an already generated valid link-to-mono link. This endpoint will return a valid link on after the /clients/{id}/create-link was Successful",
-            "operationId":"getLink",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"string"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/LinkResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientResponse"
+                }
+              }
             }
-         }
-      },
-      "/clients/{id}/linked-accounts":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get all Linked Accounts of a Client",
-            "description":"Send a request to this endpoint to get detailed information on categories returned by Plaid. This endpoint requires a unique client ID. Together with the client's personal information submitted during client creation; it also returns an array of all accounts linked to the client. These accounts are fetched from all documents uploaded and every account linked via Mono",
-            "operationId":"clientLinkedAccounts",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Linked accounts requested by ID",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "title":"Response 200 Clientlinkedaccounts",
-                           "type":"array",
-                           "items":{
-                              "$ref":"#/components/schemas/ClientLinkedAccountResponse"
-                           }
-                        },
-                        "example":{
-                           "id":"bar"
-                        }
-                     }
-                  }
-               },
-               "404":{
-                  "description":"The item was not found",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "edit:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/summary":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Summary",
-            "description":"Retrieve a summary of an a client's financial information. It aggregates and sums up data from all linked accounts. Cladfy begins preparing transactions data when the Item is created, but the process can take anywhere from a few seconds to several minutes to complete, depending on the number of transactions available.",
-            "operationId":"clientSummary",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Client summary requested by ID",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/ClientSummaryResponse"
-                        },
-                        "example":{
-                           "id":"bar"
-                        }
-                     }
-                  }
-               },
-               "404":{
-                  "description":"The item was not found",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "edit:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/transactions":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Transaction Handler",
-            "description":"Retrieve and refresh 6 to 12 months of historical transaction data, including type, amount, balanece, category information...Transaction data is standardized across financial institutions. Similarly, account data is standardized and returned with a clean name, number, balance, and other meta information where available. Transactions are returned in reverse-chronological order, and the sequence of transaction ordering is stable and will not shift. Transactions are not immutable and can also be removed altogether by the institution; a removed transaction will no longer appear here /clients/{id}/transactions. Note that e-statements data may not be immediately available to /clients/{id}/transactions. Mono will begin to prepare transactions data upon Client link.",
-            "operationId":"clientTransactions",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "title":"Response Clienttransactions",
-                           "type":"array",
-                           "items":{
-                              "$ref":"#/components/schemas/TransactionResponse"
-                           }
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/cashflow":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Cashflow Handler",
-            "description":"This endpoint returns aggregated data from all and each account. The financial data is summarised and grouped as either debit, credit, balance, averages. The number of transactions or frequency of each group is further grouped on a Daily, wekly and monthly basis",
-            "operationId":"clientCashflow",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/CashflowResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/spending":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Spending Handler",
-            "description":"Endpoint to fetch summaries of transactions grouped per category. Cladfy classifies every transaction into a set o  ever increasing number of categories. With this Classificaion, you get a summary of the client's spending habits such as goceries, school fees,governement services etc",
-            "operationId":"clientSpending",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/loans":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Loans the Client has taken",
-            "description":"This returns a summary i.e Amount borrowed, Number of times a loan was borrowed, the total amount repayed, number of times the loan was paid. Number of individual lenders, time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan, account and an aggregation of all loans and accounts",
-            "operationId":"clientLoans",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/DocumentLoanSummaryResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/savings":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client money Savings data",
-            "description":"This returns a summary i.e Amount borrowed, Number of times a has deposited into a savings account,  the total  amount deposited, number of times the deposits were done, Total amount withdrawn, number of withdrawals. Number of individual savings platforms, time taken from saving and fully withdrawing, time interval between each deposits, average deposit and withdrawal time for each savings, account and an aggregation of all loans and accounts",
-            "operationId":"clientSavings",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/SavingsSummaryResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/gambling":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Gambling and Betting",
-            "description":"This returns a summary i.e Amount gambled, Number of times a bet was placed, the amount won, number of times the client placed a bet. Number of individual gambling platforms, time taken from borrowing and placing a bet, time interval between placing bets, average amount gambled and won, per account and an aggregation of all accounts",
-            "operationId":"get_client_gambling",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/GamblingSummaryResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/overdraft":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Overdraft Credit access",
-            "description":"This endpoint returns a summary i.e Overdraft amount borrowed, Number of times a loan was borrowed, the amount repayed, number of times the loan was reaid. Time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan per account and an aggregation of all loans and accounts",
-            "operationId":"get_client_overdraft",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/OverdraftResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/disposable_income":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get a Client Affordability amount",
-            "description":"Calling this endpoint returns an amount in the account-specified currency that a client can set aside DAILY to repay a loan. It is the DisposableIncome factor; a Debt Burden Ratio (DBR), which is calculated as a ratio of the total monthly debt payments that the customer is making against the customer's total income from the last Three months. A lower DBR corresponds to a high DisposableIncome",
-            "operationId":"get_client_DisposableIncome",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/DisposableIncomeResponse"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/document_polling":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Document analysis status",
-            "description":"This fetches the analysis status of the uploaded document.It shows whether athe analysis was Successful, Still ongoing, or Failed,",
-            "operationId":"documentPolling",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/DocumentPolling"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/estimate_loan":{
-         "post":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Estimate Loan",
-            "description":"This endpoint returns an amount in the account-specified currency that a client can afford to repay comfrotably. Cladfy calculate using the DisposableIncome ratio, clients income, spending and the variables from a specific calculator. The calculator variables must be provided when calling this endpoint",
-            "operationId":"esimateClientLoan",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/LoanEsimateRequest"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/LoanEsimate"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/trends": {
-      "get": {
-         "tags": [
-            "Clients"
-         ],
-         "summary": "Get Client Trends",
-         "description": "Retrieve known transaction trends for a client. Supports filtering by trend type.",
-         "operationId": "clientTrends",
-         "parameters": [
-            {
-               "name": "id",
-               "in": "path",
-               "required": true,
-               "schema": {
-                  "title": "Id",
-                  "type": "integer"
-               }
-            },
-            {
-               "name": "account_id",
-               "in": "query",
-               "required": false,
-               "schema": {
-                  "title": "Account Id",
-                  "type": "integer"
-               }
-            },
-            {
-               "name": "trend",
-               "in": "query",
-               "required": false,
-               "schema": {
-                  "type": "string",
-                  "enum": [
-                     "money_sent",
-                     "money_received",
-                     "agent_withdrawal",
-                     "agent_deposit",
-                     "shopping",
-                     "fuel"
-                  ],
-                  "default": "money_sent"
-               }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
             }
-         ],
-         "responses": {
-            "200": {
-               "description": "Successful Response",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "$ref": "#/components/schemas/ClientTrends"
-                     }
-                  }
-               }
-            },
-            "422": {
-               "description": "Validation Error",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "$ref": "#/components/schemas/HTTPValidationError"
-                     }
-                  }
-               }
-            }
-         },
-         "security": [
-            {
-               "OAuth2PasswordBearer": []
-            }
-         ]
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
       }
-   },
-      "/clients/{id}/all_analysis_data": {
-         "get": {
-            "tags": [
-               "Clients"
-            ],
-            "summary": "Get All Client Analysis Data",
-            "description": "This endpoint combines data from multiple endpoints into a single comprehensive response, including client information, summary statistics, cashflow, spending patterns, loans, savings, gambling, overdraft, disposable_income metrics, and trends across various categories (money sent/received, agent activities, shopping, fuel).",
-            "operationId": "get_all_client_analysis_data",
-            "parameters": [
-               {
-                  "required": true,
-                  "schema": {
-                     "title": "Id",
-                     "type": "integer"
-                  },
-                  "name": "id",
-                  "in": "path"
-               },
-               {
-                  "required": false,
-                  "schema": {
-                     "title": "Account Id",
-                     "type": "integer"
-                  },
-                  "name": "account_id",
-                  "in": "query"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "Successful Response",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "type": "object",
-                           "properties": {
-                              "client_info": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/ClientResponse"
-                                 }
-                              },
-                              "summary": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/ClientSummaryResponse"
-                                 }
-                              },
-                              "cashflow": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/CashflowResponse"
-                                 }
-                              },
-                              "spending": {
-                                 "type": "object"
-                              },
-                              "loans": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
-                                 }
-                              },
-                              "savings": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/SavingsSummaryResponse"
-                                 }
-                              },
-                              "gambling": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/GamblingSummaryResponse"
-                                 }
-                              },
-                              "overdraft": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/OverdraftResponse"
-                                 }
-                              },
-                              "disposable_income": {
-                                 "type": "object",
-                                 "properties": {
-                                    "$ref": "#/components/schemas/DisposableIncomeResponse"
-                                 }
-                              },
-                              "trends": {
-                                 "type": "object",
-                                 "properties": {
-                                    "money_sent": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    },
-                                    "money_received": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    },
-                                    "agent_withdrawal": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    },
-                                    "agent_deposit": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    },
-                                    "shopping": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    },
-                                    "fuel": {
-                                       "$ref": "#/components/schemas/ClientTrends"
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
-                  }
-               },
-               "403": {
-                  "description": "Not Authorized",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "404": {
-                  "description": "Client Not Found",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422": {
-                  "description": "Validation Error",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security": [
-               {
-                  "OAuth2PasswordBearer": [
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/clients/{id}/all_documents": {
-         "get": {
-            "tags": [
-               "Documents"
-            ],
-            "summary": "Get All Client Documents",
-            "description": "Retrieves all documents associated with a client, including metadata such as type, status, creation date, and processing information.",
-            "operationId": "getAllClientDocuments",
-            "parameters": [
-               {
-                  "required": true,
-                  "schema": {
-                     "title": "Id",
-                     "type": "integer"
-                  },
-                  "name": "id",
-                  "in": "path"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "Successful Response",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "type": "array",
-                           "items": {
-                              "$ref": "#/components/schemas/Document"
-                           }
-                        }
-                     }
-                  }
-               },
-               "404": {
-                  "description": "Client Not Found",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               },
-               "403": {
-                  "description": "Not authorized to access this client",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               },
-               "422": {
-                  "description": "Validation Error",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "$ref": "#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security": [
-               {
-                  "OAuth2PasswordBearer": [
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/businesses/calculators":{
-         "get":{
-            "tags":[
-               "businesses"
-            ],
-            "summary":"Get Business Calculcators",
-            "description":"Fetch all calculators that are available for your business account",
-            "operationId":"getCalculators",
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "title":"Response Getcalculators",
-                           "type":"array",
-                           "items":{
-                              "$ref":"#/components/schemas/CalculatorResponse"
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
-      "/businesses/clients": {
-         "get": {
-            "tags": [
-               "businesses"
-            ],
-            "summary": "Get All Business Clients",
-            "description": "Retrieve all clients associated with the authenticated business.",
-            "operationId": "get_all_business_clients",
-            "responses": {
-               "200": {
-                  "description": "Successful Response",
-                  "content": {
-                     "application/json": {
-                        "schema": {
-                           "title": "Response GetAllBusinessClients",
-                           "type": "array",
-                           "items": {
-                              "$ref": "#/components/schemas/ClientResponse"
-                           }
-                        }
-                     }
-                  }
-               }
-            },
-            "security": [
-               {
-                  "OAuth2PasswordBearer": []
-               }
-            ]
-         }
-      },
-      "/documents":{
-         "post":{
-            "tags":[
-               "Documents"
-            ],
-            "summary":"Upload a document",
-            "description":"Use this endpoint to upload a document",
-            "operationId":"upload_documents_upload_post",
-            "requestBody":{
-               "content":{
-                  "multipart/form-data":{
-                     "schema":{
-                        "$ref":"#/components/schemas/Body_upload_documents_upload_post"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/UploadedFile"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "upload:document"
-                  ]
-               }
-            ]
-         }
-      },
-      "/documents/retry/{id}":{
-         "post":{
-            "tags":[
-               "Documents"
-            ],
-            "summary":"Retry Analyzing Document",
-            "description":"Request another attempt to analyze a failed document analysis",
-            "operationId":"retry_analyzing_document",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Password",
-                     "type":"string"
-                  },
-                  "name":"password",
-                  "in":"query"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/Msg"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     
-                  ]
-               }
-            ]
-         }
-      },
-      "/documents/{id}/status":{
-         "get":{
-            "tags":[
-               "Documents"
-            ],
-            "summary":"Get Document Polling",
-            "description":"",
-            "operationId":"checkAnalyzing",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/DocumentPolling"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     "view:client"
-                  ]
-               }
-            ]
-         }
-      },
-      "/mono/callback":{
-         "post":{
-            "tags":[
-               "webhooks"
-            ],
-            "summary":"Callback",
-            "operationId":"callback_mono_callback_post",
-            "parameters":[
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Mono-Webhook-Secret",
-                     "type":"string"
-                  },
-                  "name":"mono-webhook-secret",
-                  "in":"header"
-               }
-            ],
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/Callback"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/index/callback":{
-         "post":{
-            "tags":[
-               "webhooks"
-            ],
-            "summary":"Callback",
-            "operationId":"callback_index_callback_post",
-            "requestBody":{
-               "content":{
-                  "application/json":{
-                     "schema":{
-                        "$ref":"#/components/schemas/CallbackData"
-                     }
-                  }
-               },
-               "required":true
-            },
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/mono/supported_institutions":{
-         "get":{
-            "tags":[
-               "integrations"
-            ],
-            "summary":"Get Mono Supported Institutions",
-            "operationId":"get_mono_supported_institutions_mono_supported_institutions_get",
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "title":"Response Get Mono Supported Institutions Mono Supported Institutions Get",
-                           "type":"array",
-                           "items":{
-                              "$ref":"#/components/schemas/Institution"
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      },
-      "/providers/": {
+    },
+    "/clients/{id}": {
       "get": {
-        "tags":[
-               "providers"
-            ],
+        "tags": ["Clients"],
+        "summary": "Get one specific Client",
+        "description": "This uses a unique identifier i.e is the ID.The client ID is required and should be provided either in the header or as part of a request body.",
+        "operationId": "get_client_clients__id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientResponse"
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/documents": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get all Documents of a Client",
+        "description": "Calling this endpoint requires a client Id.It then returns all documents that are associated with the specified client",
+        "operationId": "client_documents_clients__id__documents_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response 200 Client Documents Clients  Id  Documents Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Document"
+                  }
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/{id}/link-mono": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Link Mono",
+        "description": "This establishes a link of the already existing client to the Mono system",
+        "operationId": "link_mono_clients__id__link_mono_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkMono"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkMono"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}/create-link": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Create Link",
+        "description": "Send a request to the /clients/{id}/create-link endpoint to generate a unique link. This new link can be used to query data from Mono. This is an optional endpoint used when clients choose to provide their statements as e-statements rather than upload files directly",
+        "operationId": "createMonoLink",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLinkReponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/email-link": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Email a Mono Link To Client",
+        "description": "You can use this endpoint to automatically send a valink link-to-mono link to an alredy created client. This requirs that (i.e only works) the client's email is provided when a client account was being created",
+        "operationId": "emailLinkToClient",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkEmail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/link/{id}": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Link",
+        "description": "Calling this endpoint by providing a specific client ID returns an already generated valid link-to-mono link. This endpoint will return a valid link on after the /clients/{id}/create-link was Successful",
+        "operationId": "getLink",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}/linked-accounts": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get all Linked Accounts of a Client",
+        "description": "Send a request to this endpoint to get detailed information on categories returned by Plaid. This endpoint requires a unique client ID. Together with the client's personal information submitted during client creation; it also returns an array of all accounts linked to the client. These accounts are fetched from all documents uploaded and every account linked via Mono",
+        "operationId": "clientLinkedAccounts",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Linked accounts requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response 200 Clientlinkedaccounts",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientLinkedAccountResponse"
+                  }
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/summary": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Summary",
+        "description": "Retrieve a summary of an a client's financial information. It aggregates and sums up data from all linked accounts. Cladfy begins preparing transactions data when the Item is created, but the process can take anywhere from a few seconds to several minutes to complete, depending on the number of transactions available.",
+        "operationId": "clientSummary",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client summary requested by ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientSummaryResponse"
+                },
+                "example": {
+                  "id": "bar"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The item was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["edit:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/transactions": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Transaction Handler",
+        "description": "Retrieve and refresh 6 to 12 months of historical transaction data, including type, amount, balanece, category information...Transaction data is standardized across financial institutions. Similarly, account data is standardized and returned with a clean name, number, balance, and other meta information where available. Transactions are returned in reverse-chronological order, and the sequence of transaction ordering is stable and will not shift. Transactions are not immutable and can also be removed altogether by the institution; a removed transaction will no longer appear here /clients/{id}/transactions. Note that e-statements data may not be immediately available to /clients/{id}/transactions. Mono will begin to prepare transactions data upon Client link.",
+        "operationId": "clientTransactions",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Clienttransactions",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionResponse"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/cashflow": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Cashflow Handler",
+        "description": "This endpoint returns aggregated data from all and each account. The financial data is summarised and grouped as either debit, credit, balance, averages. The number of transactions or frequency of each group is further grouped on a Daily, wekly and monthly basis",
+        "operationId": "clientCashflow",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashflowResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/spending": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Spending Handler",
+        "description": "Endpoint to fetch summaries of transactions grouped per category. Cladfy classifies every transaction into a set o  ever increasing number of categories. With this Classificaion, you get a summary of the client's spending habits such as goceries, school fees,governement services etc",
+        "operationId": "clientSpending",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/loans": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Loans the Client has taken",
+        "description": "This returns a summary i.e Amount borrowed, Number of times a loan was borrowed, the total amount repayed, number of times the loan was paid. Number of individual lenders, time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan, account and an aggregation of all loans and accounts",
+        "operationId": "clientLoans",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/savings": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client money Savings data",
+        "description": "This returns a summary i.e Amount borrowed, Number of times a has deposited into a savings account,  the total  amount deposited, number of times the deposits were done, Total amount withdrawn, number of withdrawals. Number of individual savings platforms, time taken from saving and fully withdrawing, time interval between each deposits, average deposit and withdrawal time for each savings, account and an aggregation of all loans and accounts",
+        "operationId": "clientSavings",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavingsSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/gambling": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Gambling and Betting",
+        "description": "This returns a summary i.e Amount gambled, Number of times a bet was placed, the amount won, number of times the client placed a bet. Number of individual gambling platforms, time taken from borrowing and placing a bet, time interval between placing bets, average amount gambled and won, per account and an aggregation of all accounts",
+        "operationId": "get_client_gambling",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GamblingSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/overdraft": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Overdraft Credit access",
+        "description": "This endpoint returns a summary i.e Overdraft amount borrowed, Number of times a loan was borrowed, the amount repayed, number of times the loan was reaid. Time taken from borrowing, fully repaying, time interval between taking a new loan, average repayment time for each loan per account and an aggregation of all loans and accounts",
+        "operationId": "get_client_overdraft",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverdraftResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/disposable_income": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get a Client Affordability amount",
+        "description": "Calling this endpoint returns an amount in the account-specified currency that a client can set aside DAILY to repay a loan. It is the DisposableIncome factor; a Debt Burden Ratio (DBR), which is calculated as a ratio of the total monthly debt payments that the customer is making against the customer's total income from the last Three months. A lower DBR corresponds to a high DisposableIncome",
+        "operationId": "get_client_DisposableIncome",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisposableIncomeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/document_polling": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Document analysis status",
+        "description": "This fetches the analysis status of the uploaded document.It shows whether athe analysis was Successful, Still ongoing, or Failed,",
+        "operationId": "documentPolling",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPolling"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/estimate_loan": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Estimate Loan",
+        "description": "This endpoint returns an amount in the account-specified currency that a client can afford to repay comfrotably. Cladfy calculate using the DisposableIncome ratio, clients income, spending and the variables from a specific calculator. The calculator variables must be provided when calling this endpoint",
+        "operationId": "esimateClientLoan",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanEsimateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoanEsimate"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/{id}/trends": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get Client Trends",
+        "description": "Retrieve known transaction trends for a client. Supports filtering by trend type.",
+        "operationId": "clientTrends",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "account_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "trend",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "money_sent",
+                "money_received",
+                "agent_withdrawal",
+                "agent_deposit",
+                "shopping",
+                "fuel"
+              ],
+              "default": "money_sent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientTrends"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/clients/{id}/all_analysis_data": {
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get All Client Analysis Data",
+        "description": "This endpoint combines data from multiple endpoints into a single comprehensive response, including client information, summary statistics, cashflow, spending patterns, loans, savings, gambling, overdraft, disposable_income metrics, and trends across various categories (money sent/received, agent activities, shopping, fuel).",
+        "operationId": "get_all_client_analysis_data",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Id",
+              "type": "integer"
+            },
+            "name": "account_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "client_info": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/ClientResponse"
+                      }
+                    },
+                    "summary": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/ClientSummaryResponse"
+                      }
+                    },
+                    "cashflow": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/CashflowResponse"
+                      }
+                    },
+                    "spending": {
+                      "type": "object"
+                    },
+                    "loans": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+                      }
+                    },
+                    "savings": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/SavingsSummaryResponse"
+                      }
+                    },
+                    "gambling": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/GamblingSummaryResponse"
+                      }
+                    },
+                    "overdraft": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/OverdraftResponse"
+                      }
+                    },
+                    "disposable_income": {
+                      "type": "object",
+                      "properties": {
+                        "$ref": "#/components/schemas/DisposableIncomeResponse"
+                      }
+                    },
+                    "trends": {
+                      "type": "object",
+                      "properties": {
+                        "money_sent": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        },
+                        "money_received": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        },
+                        "agent_withdrawal": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        },
+                        "agent_deposit": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        },
+                        "shopping": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        },
+                        "fuel": {
+                          "$ref": "#/components/schemas/ClientTrends"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not Authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Client Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/all_documents": {
+      "get": {
+        "tags": ["Documents"],
+        "summary": "Get All Client Documents",
+        "description": "Retrieves all documents associated with a client, including metadata such as type, status, creation date, and processing information.",
+        "operationId": "getAllClientDocuments",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Document"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Client Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized to access this client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/clients/{id}/download_report": {
+      "get": {
+        "tags": ["Reports"],
+        "summary": "Download Client Report",
+        "description": "Generates and downloads a PDF report containing detailed client information.",
+        "operationId": "downloadClientReportPublic",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {
+              "Content-Disposition": {
+                "description": "Indicates the file attachment",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "X-Filename": {
+                "description": "The name of the generated PDF file",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Length": {
+                "description": "Size of the PDF file",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Client Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/businesses/calculators": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Get Business Calculcators",
+        "description": "Fetch all calculators that are available for your business account",
+        "operationId": "getCalculators",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Getcalculators",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalculatorResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/businesses/clients": {
+      "get": {
+        "tags": ["businesses"],
+        "summary": "Get All Business Clients",
+        "description": "Retrieve all clients associated with the authenticated business.",
+        "operationId": "get_all_business_clients",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response GetAllBusinessClients",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/documents": {
+      "post": {
+        "tags": ["Documents"],
+        "summary": "Upload a document",
+        "description": "Use this endpoint to upload a document",
+        "operationId": "upload_documents_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_documents_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadedFile"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["upload:document"]
+          }
+        ]
+      }
+    },
+    "/documents/retry/{id}": {
+      "post": {
+        "tags": ["Documents"],
+        "summary": "Retry Analyzing Document",
+        "description": "Request another attempt to analyze a failed document analysis",
+        "operationId": "retry_analyzing_document",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Password",
+              "type": "string"
+            },
+            "name": "password",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Msg"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/documents/{id}/status": {
+      "get": {
+        "tags": ["Documents"],
+        "summary": "Get Document Polling",
+        "description": "",
+        "operationId": "checkAnalyzing",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "integer"
+            },
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPolling"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": ["view:client"]
+          }
+        ]
+      }
+    },
+    "/mono/callback": {
+      "post": {
+        "tags": ["webhooks"],
+        "summary": "Callback",
+        "operationId": "callback_mono_callback_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Mono-Webhook-Secret",
+              "type": "string"
+            },
+            "name": "mono-webhook-secret",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Callback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/index/callback": {
+      "post": {
+        "tags": ["webhooks"],
+        "summary": "Callback",
+        "operationId": "callback_index_callback_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mono/supported_institutions": {
+      "get": {
+        "tags": ["integrations"],
+        "summary": "Get Mono Supported Institutions",
+        "operationId": "get_mono_supported_institutions_mono_supported_institutions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Mono Supported Institutions Mono Supported Institutions Get",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Institution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/": {
+      "get": {
+        "tags": ["providers"],
         "summary": "Get providers",
         "description": "Get a list of supported providers with their codes and descriptions.",
         "operationId": "get_providers",
@@ -1772,1137 +1735,1052 @@
           }
         }
       }
-    } 
-    },
-   "components":{
-      "schemas":{
-         "AllClientAnalysisData": {
-      "title": "AllClientAnalysisData",
-      "type": "object",
-      "properties": {
-        "client_info": {
-          "$ref": "#/components/schemas/ClientResponse"
-        },
-        "summary": {
-          "$ref": "#/components/schemas/ClientSummaryResponse"
-        },
-        "cashflow": {
-          "$ref": "#/components/schemas/CashflowResponse"
-        },
-        "spending": {
-          "type": "object"
-        },
-        "loans": {
-          "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
-        },
-        "savings": {
-          "$ref": "#/components/schemas/SavingsSummaryResponse"
-        },
-        "gambling": {
-          "$ref": "#/components/schemas/GamblingSummaryResponse"
-        },
-        "overdraft": {
-          "$ref": "#/components/schemas/OverdraftResponse"
-        },
-        "disposable_income": {
-          "$ref": "#/components/schemas/DisposableIncomeResponse"
-        },
-        "trends": {
-          "type": "object",
-          "properties": {
-            "money_sent": {
-              "$ref": "#/components/schemas/ClientTrends"
-            },
-            "money_received": {
-              "$ref": "#/components/schemas/ClientTrends"
-            },
-            "agent_withdrawal": {
-              "$ref": "#/components/schemas/ClientTrends"
-            },
-            "agent_deposit": {
-              "$ref": "#/components/schemas/ClientTrends"
-            },
-            "shopping": {
-              "$ref": "#/components/schemas/ClientTrends"
-            },
-            "fuel": {
-              "$ref": "#/components/schemas/ClientTrends"
+    }
+  },
+  "components": {
+    "schemas": {
+      "AllClientAnalysisData": {
+        "title": "AllClientAnalysisData",
+        "type": "object",
+        "properties": {
+          "client_info": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/ClientSummaryResponse"
+          },
+          "cashflow": {
+            "$ref": "#/components/schemas/CashflowResponse"
+          },
+          "spending": {
+            "type": "object"
+          },
+          "loans": {
+            "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+          },
+          "savings": {
+            "$ref": "#/components/schemas/SavingsSummaryResponse"
+          },
+          "gambling": {
+            "$ref": "#/components/schemas/GamblingSummaryResponse"
+          },
+          "overdraft": {
+            "$ref": "#/components/schemas/OverdraftResponse"
+          },
+          "disposable_income": {
+            "$ref": "#/components/schemas/DisposableIncomeResponse"
+          },
+          "trends": {
+            "type": "object",
+            "properties": {
+              "money_sent": {
+                "$ref": "#/components/schemas/ClientTrends"
+              },
+              "money_received": {
+                "$ref": "#/components/schemas/ClientTrends"
+              },
+              "agent_withdrawal": {
+                "$ref": "#/components/schemas/ClientTrends"
+              },
+              "agent_deposit": {
+                "$ref": "#/components/schemas/ClientTrends"
+              },
+              "shopping": {
+                "$ref": "#/components/schemas/ClientTrends"
+              },
+              "fuel": {
+                "$ref": "#/components/schemas/ClientTrends"
+              }
             }
           }
         }
-      }
-    },
-         "Account":{
-            "title":"Account",
-            "required":[
-               "name",
-               "currency",
-               "type",
-               "accountNumber",
-               "balance"
+      },
+      "Account": {
+        "title": "Account",
+        "required": ["name", "currency", "type", "accountNumber", "balance"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "accountNumber": {
+            "title": "Accountnumber",
+            "type": "string"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "number"
+          }
+        }
+      },
+      "AccountReponse": {
+        "title": "AccountReponse",
+        "required": ["account"],
+        "type": "object",
+        "properties": {
+          "meta": {
+            "title": "Meta"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          }
+        }
+      },
+      "AccountReponseSchema": {
+        "title": "AccountReponseSchema",
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "accountNumber": {
+            "title": "Accountnumber",
+            "type": "string"
+          },
+          "start_date": {
+            "title": "Start Date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_date": {
+            "title": "End Date",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DisposableIncomeResponse": {
+        "title": "DisposableIncomeResponse",
+        "required": ["last_3months_disposable_income"],
+        "type": "object",
+        "properties": {
+          "last_3months_disposable_income": {
+            "title": "Last 3 Months Diaposable Income",
+            "type": "number"
+          }
+        }
+      },
+      "Body_upload_documents_upload_post": {
+        "title": "Body_upload_documents_upload_post",
+        "required": ["fileobject"],
+        "type": "object",
+        "properties": {
+          "fileobject": {
+            "title": "Fileobject",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "CalculatorResponse": {
+        "title": "CalculatorResponse",
+        "required": ["id", "name", "interest_rate", "duration"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "interest_rate": {
+            "title": "Interest Rate",
+            "type": "number"
+          },
+          "duration": {
+            "title": "Duration",
+            "type": "integer"
+          }
+        }
+      },
+      "Callback": {
+        "title": "Callback",
+        "required": ["event"],
+        "type": "object",
+        "properties": {
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "data": {
+            "title": "Data"
+          }
+        }
+      },
+      "CallbackData": {
+        "title": "CallbackData",
+        "required": ["Body"],
+        "type": "object",
+        "properties": {
+          "Body": {
+            "$ref": "#/components/schemas/CallbackDataBody"
+          }
+        }
+      },
+      "CallbackDataBody": {
+        "title": "CallbackDataBody",
+        "required": ["stkCallback"],
+        "type": "object",
+        "properties": {
+          "stkCallback": {
+            "$ref": "#/components/schemas/CallbackDataStkCallback"
+          }
+        }
+      },
+      "CallbackDataStkCallback": {
+        "title": "CallbackDataStkCallback",
+        "required": ["CheckoutRequestID", "ResultCode", "ResultDesc"],
+        "type": "object",
+        "properties": {
+          "CheckoutRequestID": {
+            "title": "Checkoutrequestid",
+            "type": "string"
+          },
+          "ResultCode": {
+            "title": "Resultcode",
+            "type": "integer"
+          },
+          "ResultDesc": {
+            "title": "Resultdesc",
+            "type": "string"
+          },
+          "CallbackMetadata": {
+            "$ref": "#/components/schemas/MetaData"
+          }
+        }
+      },
+      "CallbackMetadataItem": {
+        "title": "CallbackMetadataItem",
+        "required": ["Name"],
+        "type": "object",
+        "properties": {
+          "Name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "Value": {
+            "title": "Value"
+          }
+        }
+      },
+      "CashflowAveragesResponse": {
+        "title": "CashflowAveragesResponse",
+        "required": [
+          "weekly_inflow_average",
+          "weekly_outflow_average",
+          "weekly_average_balance",
+          "daily_inflow_average",
+          "daily_outflow_average",
+          "daily_average_balance"
+        ],
+        "type": "object",
+        "properties": {
+          "weekly_inflow_average": {
+            "title": "Weekly Inflow Average",
+            "type": "number"
+          },
+          "weekly_outflow_average": {
+            "title": "Weekly Outflow Average",
+            "type": "number"
+          },
+          "weekly_average_balance": {
+            "title": "Weekly Average Balance",
+            "type": "number"
+          },
+          "daily_inflow_average": {
+            "title": "Daily Inflow Average",
+            "type": "number"
+          },
+          "daily_outflow_average": {
+            "title": "Daily Outflow Average",
+            "type": "number"
+          },
+          "daily_average_balance": {
+            "title": "Daily Average Balance",
+            "type": "number"
+          }
+        }
+      },
+      "CashflowMonthlyResponse": {
+        "title": "CashflowMonthlyResponse",
+        "required": [
+          "start_date",
+          "paid_in",
+          "withdrawn",
+          "balance",
+          "paid_in_count",
+          "withdrawn_count"
+        ],
+        "type": "object",
+        "properties": {
+          "start_date": {
+            "title": "Start Date",
+            "type": "string",
+            "format": "date-time"
+          },
+          "paid_in": {
+            "title": "Paid In",
+            "type": "integer"
+          },
+          "withdrawn": {
+            "title": "Withdrawn",
+            "type": "integer"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "integer"
+          },
+          "paid_in_count": {
+            "title": "Paid In Count",
+            "type": "integer"
+          },
+          "withdrawn_count": {
+            "title": "Withdrawn Count",
+            "type": "integer"
+          }
+        }
+      },
+      "CashflowResponse": {
+        "title": "CashflowResponse",
+        "required": ["monthly", "averages"],
+        "type": "object",
+        "properties": {
+          "monthly": {
+            "title": "Monthly",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashflowMonthlyResponse"
+            }
+          },
+          "averages": {
+            "$ref": "#/components/schemas/CashflowAveragesResponse"
+          }
+        }
+      },
+      "ClientLinkedAccountResponse": {
+        "title": "ClientLinkedAccountResponse",
+        "required": ["id", "client"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "account": {
+            "$ref": "#/components/schemas/AccountReponse"
+          },
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ClientPaginatedResponse": {
+        "title": "ClientPaginatedResponse",
+        "required": ["clients", "count"],
+        "type": "object",
+        "properties": {
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "clients": {
+            "title": "Clients",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "ClientResponse": {
+        "title": "ClientResponse",
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "created_on": {
+            "title": "Created On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_on": {
+            "title": "Updated On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "national_id": {
+            "title": "National Id",
+            "type": "string"
+          },
+          "full_name": {
+            "title": "Full Name",
+            "type": "string"
+          },
+          "total_documents": {
+            "title": "Total Documents",
+            "type": "integer"
+          },
+          "accounts": {
+            "title": "Accounts",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountReponseSchema"
+            }
+          },
+          "transactions_duration": {
+            "title": "Transactions Duration",
+            "type": "string"
+          }
+        }
+      },
+      "ClientSummaryResponse": {
+        "title": "ClientSummaryResponse",
+        "required": [
+          "total_in",
+          "total_out",
+          "loans",
+          "zero_balance_rate_percentage"
+        ],
+        "type": "object",
+        "properties": {
+          "total_in": {
+            "title": "Total In",
+            "type": "integer"
+          },
+          "total_out": {
+            "title": "Total Out",
+            "type": "integer"
+          },
+          "loans": {
+            "title": "Loans",
+            "type": "integer"
+          },
+          "zero_balance_rate_percentage": {
+            "title": "Zero Balance Rate",
+            "type": "number"
+          },
+          "largest_in": {
+            "$ref": "#/components/schemas/TransactionResponse"
+          },
+          "largest_out": {
+            "$ref": "#/components/schemas/TransactionResponse"
+          }
+        }
+      },
+      "ClientTransactionTrend": {
+        "title": "ClientTransactionTrend",
+        "required": [
+          "subject",
+          "frequency",
+          "frequency_percent",
+          "amount",
+          "amount_percent"
+        ],
+        "type": "object",
+        "properties": {
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "frequency": {
+            "title": "Frequency",
+            "type": "integer"
+          },
+          "frequency_percent": {
+            "title": "Frequency Percent",
+            "type": "number"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          },
+          "amount_percent": {
+            "title": "Amount Percent",
+            "type": "number"
+          }
+        }
+      },
+      "ClientTrends": {
+        "title": "ClientTrends",
+        "required": [
+          "trend_type",
+          "total",
+          "count",
+          "largest_amount",
+          "smallest_amount",
+          "avg",
+          "transactions"
+        ],
+        "type": "object",
+        "properties": {
+          "trend_type": {
+            "title": "Trend Type",
+            "type": "string",
+            "enum": [
+              "money_sent",
+              "money_received",
+              "agent_withdrawal",
+              "agent_deposit",
+              "shopping",
+              "fuel"
             ],
-            "type":"object",
-            "properties":{
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "currency":{
-                  "title":"Currency",
-                  "type":"string"
-               },
-               "type":{
-                  "title":"Type",
-                  "type":"string"
-               },
-               "accountNumber":{
-                  "title":"Accountnumber",
-                  "type":"string"
-               },
-               "balance":{
-                  "title":"Balance",
-                  "type":"number"
-               }
+            "description": "The type of transaction trend being analyzed."
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer",
+            "description": "Total transaction amount for the trend type."
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer",
+            "description": "Total number of transactions in this trend."
+          },
+          "largest_amount": {
+            "title": "Largest Amount",
+            "type": "integer",
+            "description": "The highest transaction amount recorded for this trend."
+          },
+          "smallest_amount": {
+            "title": "Smallest Amount",
+            "type": "integer",
+            "description": "The smallest transaction amount recorded for this trend."
+          },
+          "avg": {
+            "title": "Avg",
+            "type": "number",
+            "description": "The average transaction value for the given trend type."
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "array",
+            "description": "A list of individual transactions related to this trend.",
+            "items": {
+              "$ref": "#/components/schemas/ClientTransactionTrend"
             }
-         },
-         "AccountReponse":{
-            "title":"AccountReponse",
-            "required":[
-               "account"
-            ],
-            "type":"object",
-            "properties":{
-               "meta":{
-                  "title":"Meta"
-               },
-               "account":{
-                  "$ref":"#/components/schemas/Account"
-               }
+          }
+        }
+      },
+      "CreateAccount": {
+        "title": "CreateAccount",
+        "required": ["email", "password", "phone_number"],
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "company_name": {
+            "title": "Company Name",
+            "type": "string"
+          },
+          "preferred_name": {
+            "title": "Preferred Name",
+            "type": "string"
+          }
+        }
+      },
+      "CreateClient": {
+        "title": "CreateClient",
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "phone_number": {
+            "title": "Phone Number",
+            "type": "string"
+          },
+          "last_name": {
+            "title": "Last Name",
+            "type": "string"
+          },
+          "first_name": {
+            "title": "First Name",
+            "type": "string"
+          },
+          "national_id": {
+            "title": "National Id",
+            "type": "string"
+          }
+        }
+      },
+      "CreateLinkReponse": {
+        "title": "CreateLinkReponse",
+        "required": ["link"],
+        "type": "object",
+        "properties": {
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "Document": {
+        "title": "Document",
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "results": {
+            "title": "Results",
+            "type": "string"
+          },
+          "last_anaylzed_on": {
+            "title": "Last Anaylzed On",
+            "type": "string",
+            "format": "date-time"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DocumentStatus"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "string"
+          },
+          "props": {
+            "title": "Props",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "integer"
+          },
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string",
+            "format": "date-time"
+          },
+          "account_id": {
+            "title": "Account Id",
+            "type": "integer"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        }
+      },
+      "DocumentCreate": {
+        "title": "DocumentCreate",
+        "required": ["url", "name"],
+        "type": "object",
+        "properties": {
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "client_id": {
+            "title": "Client Id",
+            "type": "integer"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          }
+        }
+      },
+      "DocumentPolling": {
+        "title": "DocumentPolling",
+        "required": ["polling"],
+        "type": "object",
+        "properties": {
+          "polling": {
+            "title": "Polling",
+            "type": "boolean"
+          }
+        }
+      },
+      "DocumentResponse": {
+        "title": "DocumentResponse",
+        "required": ["documents", "count"],
+        "type": "object",
+        "properties": {
+          "documents": {
+            "title": "Documents",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
             }
-         },
-         "AccountReponseSchema":{
-            "title":"AccountReponseSchema",
-            "required":[
-               "id"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "duration":{
-                  "title":"Duration",
-                  "type":"string"
-               },
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "accountNumber":{
-                  "title":"Accountnumber",
-                  "type":"string"
-               },
-               "start_date":{
-                  "title":"Start Date",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "end_date":{
-                  "title":"End Date",
-                  "type":"string",
-                  "format":"date-time"
-               }
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentStatus": {
+        "title": "DocumentStatus",
+        "enum": [1, 2, 3],
+        "description": "An enumeration."
+      },
+      "GamblingSummary": {
+        "title": "GamblingSummary",
+        "required": [
+          "platform",
+          "amount_spent",
+          "amount_earned",
+          "gambling_freq"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "amount_spent": {
+            "title": "Amount Spent",
+            "type": "number"
+          },
+          "amount_earned": {
+            "title": "Amount Earned",
+            "type": "number"
+          },
+          "gambling_freq": {
+            "title": "Gambling Freq",
+            "type": "integer"
+          }
+        }
+      },
+      "GamblingSummaryResponse": {
+        "title": "GamblingSummaryResponse",
+        "required": ["overview", "summary"],
+        "type": "object",
+        "properties": {
+          "overview": {
+            "$ref": "#/components/schemas/GamblingSummary"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GamblingSummary"
             }
-         },
-         "DisposableIncomeResponse":{
-            "title":"DisposableIncomeResponse",
-            "required":[
-               "last_3months_disposable_income"
-            ],
-            "type":"object",
-            "properties":{
-               "last_3months_disposable_income":{
-                  "title":"Last 3 Months Diaposable Income",
-                  "type":"number"
-               }
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
             }
-         },
-         "Body_upload_documents_upload_post":{
-            "title":"Body_upload_documents_upload_post",
-            "required":[
-               "fileobject"
-            ],
-            "type":"object",
-            "properties":{
-               "fileobject":{
-                  "title":"Fileobject",
-                  "type":"string",
-                  "format":"binary"
-               }
+          }
+        }
+      },
+      "Institution": {
+        "title": "Institution",
+        "required": [
+          "name",
+          "type",
+          "country",
+          "primaryColor",
+          "identifier",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "ui": {
+            "title": "Ui"
+          },
+          "country": {
+            "title": "Country",
+            "type": "string"
+          },
+          "primaryColor": {
+            "title": "Primarycolor",
+            "type": "string"
+          },
+          "identifier": {
+            "title": "Identifier",
+            "type": "string"
+          },
+          "icon": {
+            "title": "Icon",
+            "type": "string"
+          },
+          "auth_methods": {
+            "title": "Auth Methods"
+          },
+          "forgotPasswordLink": {
+            "title": "Forgotpasswordlink"
+          },
+          "timeout": {
+            "title": "Timeout",
+            "type": "integer"
+          },
+          "bankCode": {
+            "title": "Bankcode",
+            "type": "string"
+          },
+          "bank_code": {
+            "title": "Bank Code",
+            "type": "string"
+          },
+          "sandbox": {
+            "title": "Sandbox"
+          }
+        }
+      },
+      "LinkEmail": {
+        "title": "LinkEmail",
+        "required": ["link"],
+        "type": "object",
+        "properties": {
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "LinkMono": {
+        "title": "LinkMono",
+        "required": ["code"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          }
+        }
+      },
+      "LinkResponse": {
+        "title": "LinkResponse",
+        "required": ["client", "link"],
+        "type": "object",
+        "properties": {
+          "client": {
+            "$ref": "#/components/schemas/ClientResponse"
+          },
+          "link": {
+            "title": "Link",
+            "type": "string"
+          }
+        }
+      },
+      "LoanEsimate": {
+        "title": "LoanEsimate",
+        "required": ["amount"],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "integer"
+          }
+        }
+      },
+      "LoanEsimateRequest": {
+        "title": "LoanEsimateRequest",
+        "required": ["calculator"],
+        "type": "object",
+        "properties": {
+          "calculator": {
+            "title": "Calculator",
+            "type": "integer"
+          }
+        }
+      },
+      "MetaData": {
+        "title": "MetaData",
+        "required": ["Item"],
+        "type": "object",
+        "properties": {
+          "Item": {
+            "title": "Item",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CallbackMetadataItem"
             }
-         },
-         "CalculatorResponse":{
-            "title":"CalculatorResponse",
-            "required":[
-               "id",
-               "name",
-               "interest_rate",
-               "duration"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "interest_rate":{
-                  "title":"Interest Rate",
-                  "type":"number"
-               },
-               "duration":{
-                  "title":"Duration",
-                  "type":"integer"
-               }
+          }
+        }
+      },
+      "Msg": {
+        "title": "Msg",
+        "required": ["msg"],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "title": "Msg",
+            "type": "string"
+          }
+        }
+      },
+      "OverdraftOverview": {
+        "title": "OverdraftOverview",
+        "required": [
+          "amount_taken",
+          "amount_paid",
+          "average_loan",
+          "number_of_loans"
+        ],
+        "type": "object",
+        "properties": {
+          "amount_taken": {
+            "title": "Amount Taken",
+            "type": "number"
+          },
+          "amount_paid": {
+            "title": "Amount Paid",
+            "type": "number"
+          },
+          "average_loan": {
+            "title": "Average Loan",
+            "type": "number"
+          },
+          "number_of_loans": {
+            "title": "Number Of Loans",
+            "type": "number"
+          }
+        }
+      },
+      "OverdraftResponse": {
+        "title": "OverdraftResponse",
+        "required": ["overview", "transactions"],
+        "type": "object",
+        "properties": {
+          "overview": {
+            "$ref": "#/components/schemas/OverdraftOverview"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OverdraftTransaction"
             }
-         },
-         "Callback":{
-            "title":"Callback",
-            "required":[
-               "event"
-            ],
-            "type":"object",
-            "properties":{
-               "event":{
-                  "title":"Event",
-                  "type":"string"
-               },
-               "data":{
-                  "title":"Data"
-               }
-            }
-         },
-         "CallbackData":{
-            "title":"CallbackData",
-            "required":[
-               "Body"
-            ],
-            "type":"object",
-            "properties":{
-               "Body":{
-                  "$ref":"#/components/schemas/CallbackDataBody"
-               }
-            }
-         },
-         "CallbackDataBody":{
-            "title":"CallbackDataBody",
-            "required":[
-               "stkCallback"
-            ],
-            "type":"object",
-            "properties":{
-               "stkCallback":{
-                  "$ref":"#/components/schemas/CallbackDataStkCallback"
-               }
-            }
-         },
-         "CallbackDataStkCallback":{
-            "title":"CallbackDataStkCallback",
-            "required":[
-               "CheckoutRequestID",
-               "ResultCode",
-               "ResultDesc"
-            ],
-            "type":"object",
-            "properties":{
-               "CheckoutRequestID":{
-                  "title":"Checkoutrequestid",
-                  "type":"string"
-               },
-               "ResultCode":{
-                  "title":"Resultcode",
-                  "type":"integer"
-               },
-               "ResultDesc":{
-                  "title":"Resultdesc",
-                  "type":"string"
-               },
-               "CallbackMetadata":{
-                  "$ref":"#/components/schemas/MetaData"
-               }
-            }
-         },
-         "CallbackMetadataItem":{
-            "title":"CallbackMetadataItem",
-            "required":[
-               "Name"
-            ],
-            "type":"object",
-            "properties":{
-               "Name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "Value":{
-                  "title":"Value"
-               }
-            }
-         },
-         "CashflowAveragesResponse":{
-            "title":"CashflowAveragesResponse",
-            "required":[
-               "weekly_inflow_average",
-               "weekly_outflow_average",
-               "weekly_average_balance",
-               "daily_inflow_average",
-               "daily_outflow_average",
-               "daily_average_balance"
-            ],
-            "type":"object",
-            "properties":{
-               "weekly_inflow_average":{
-                  "title":"Weekly Inflow Average",
-                  "type":"number"
-               },
-               "weekly_outflow_average":{
-                  "title":"Weekly Outflow Average",
-                  "type":"number"
-               },
-               "weekly_average_balance":{
-                  "title":"Weekly Average Balance",
-                  "type":"number"
-               },
-               "daily_inflow_average":{
-                  "title":"Daily Inflow Average",
-                  "type":"number"
-               },
-               "daily_outflow_average":{
-                  "title":"Daily Outflow Average",
-                  "type":"number"
-               },
-               "daily_average_balance":{
-                  "title":"Daily Average Balance",
-                  "type":"number"
-               }
-            }
-         },
-         "CashflowMonthlyResponse":{
-            "title":"CashflowMonthlyResponse",
-            "required":[
-               "start_date",
-               "paid_in",
-               "withdrawn",
-               "balance",
-               "paid_in_count",
-               "withdrawn_count"
-            ],
-            "type":"object",
-            "properties":{
-               "start_date":{
-                  "title":"Start Date",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "paid_in":{
-                  "title":"Paid In",
-                  "type":"integer"
-               },
-               "withdrawn":{
-                  "title":"Withdrawn",
-                  "type":"integer"
-               },
-               "balance":{
-                  "title":"Balance",
-                  "type":"integer"
-               },
-               "paid_in_count":{
-                  "title":"Paid In Count",
-                  "type":"integer"
-               },
-               "withdrawn_count":{
-                  "title":"Withdrawn Count",
-                  "type":"integer"
-               }
-            }
-         },
-         "CashflowResponse":{
-            "title":"CashflowResponse",
-            "required":[
-               "monthly",
-               "averages"
-            ],
-            "type":"object",
-            "properties":{
-               "monthly":{
-                  "title":"Monthly",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/CashflowMonthlyResponse"
-                  }
-               },
-               "averages":{
-                  "$ref":"#/components/schemas/CashflowAveragesResponse"
-               }
-            }
-         },
-         "ClientLinkedAccountResponse":{
-            "title":"ClientLinkedAccountResponse",
-            "required":[
-               "id",
-               "client"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "client":{
-                  "$ref":"#/components/schemas/ClientResponse"
-               },
-               "account":{
-                  "$ref":"#/components/schemas/AccountReponse"
-               },
-               "created_on":{
-                  "title":"Created On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updated_on":{
-                  "title":"Updated On",
-                  "type":"string",
-                  "format":"date-time"
-               }
-            }
-         },
-         "ClientPaginatedResponse":{
-            "title":"ClientPaginatedResponse",
-            "required":[
-               "clients",
-               "count"
-            ],
-            "type":"object",
-            "properties":{
-               "created_on":{
-                  "title":"Created On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updated_on":{
-                  "title":"Updated On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "clients":{
-                  "title":"Clients",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/ClientResponse"
-                  }
-               },
-               "count":{
-                  "title":"Count",
-                  "type":"integer"
-               }
-            }
-         },
-         "ClientResponse":{
-            "title":"ClientResponse",
-            "required":[
-               "id"
-            ],
-            "type":"object",
-            "properties":{
-               "created_on":{
-                  "title":"Created On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "updated_on":{
-                  "title":"Updated On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "email":{
-                  "title":"Email",
-                  "type":"string"
-               },
-               "phone_number":{
-                  "title":"Phone Number",
-                  "type":"string"
-               },
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "last_name":{
-                  "title":"Last Name",
-                  "type":"string"
-               },
-               "first_name":{
-                  "title":"First Name",
-                  "type":"string"
-               },
-               "national_id":{
-                  "title":"National Id",
-                  "type":"string"
-               },
-               "full_name":{
-                  "title":"Full Name",
-                  "type":"string"
-               },
-               "total_documents":{
-                  "title":"Total Documents",
-                  "type":"integer"
-               },
-               "accounts":{
-                  "title":"Accounts",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/AccountReponseSchema"
-                  }
-               },
-               "transactions_duration":{
-                  "title":"Transactions Duration",
-                  "type":"string"
-               }
-            }
-         },
-         "ClientSummaryResponse":{
-            "title":"ClientSummaryResponse",
-            "required":[
-               "total_in",
-               "total_out",
-               "loans",
-               "zero_balance_rate_percentage"
-            ],
-            "type":"object",
-            "properties":{
-               "total_in":{
-                  "title":"Total In",
-                  "type":"integer"
-               },
-               "total_out":{
-                  "title":"Total Out",
-                  "type":"integer"
-               },
-               "loans":{
-                  "title":"Loans",
-                  "type":"integer"
-               },
-               "zero_balance_rate_percentage":{
-                  "title":"Zero Balance Rate",
-                  "type":"number"
-               },
-               "largest_in":{
-                  "$ref":"#/components/schemas/TransactionResponse"
-               },
-               "largest_out":{
-                  "$ref":"#/components/schemas/TransactionResponse"
-               }
-            }
-         },
-         "ClientTransactionTrend":{
-            "title":"ClientTransactionTrend",
-            "required":[
-               "subject",
-               "frequency",
-               "frequency_percent",
-               "amount",
-               "amount_percent"
-            ],
-            "type":"object",
-            "properties":{
-               "subject":{
-                  "title":"Subject",
-                  "type":"string"
-               },
-               "frequency":{
-                  "title":"Frequency",
-                  "type":"integer"
-               },
-               "frequency_percent":{
-                  "title":"Frequency Percent",
-                  "type":"number"
-               },
-               "amount":{
-                  "title":"Amount",
-                  "type":"integer"
-               },
-               "amount_percent":{
-                  "title":"Amount Percent",
-                  "type":"number"
-               }
-            }
-         },
-        "ClientTrends": {
-  "title": "ClientTrends",
-  "required": [
-    "trend_type",
-    "total",
-    "count",
-    "largest_amount",
-    "smallest_amount",
-    "avg",
-    "transactions"
-  ],
-  "type": "object",
-  "properties": {
-    "trend_type": {
-      "title": "Trend Type",
-      "type": "string",
-      "enum": [
-        "money_sent",
-        "money_received",
-        "agent_withdrawal",
-        "agent_deposit",
-        "shopping",
-        "fuel"
-      ],
-      "description": "The type of transaction trend being analyzed."
-    },
-    "total": {
-      "title": "Total",
-      "type": "integer",
-      "description": "Total transaction amount for the trend type."
-    },
-    "count": {
-      "title": "Count",
-      "type": "integer",
-      "description": "Total number of transactions in this trend."
-    },
-    "largest_amount": {
-      "title": "Largest Amount",
-      "type": "integer",
-      "description": "The highest transaction amount recorded for this trend."
-    },
-    "smallest_amount": {
-      "title": "Smallest Amount",
-      "type": "integer",
-      "description": "The smallest transaction amount recorded for this trend."
-    },
-    "avg": {
-      "title": "Avg",
-      "type": "number",
-      "description": "The average transaction value for the given trend type."
-    },
-    "transactions": {
-      "title": "Transactions",
-      "type": "array",
-      "description": "A list of individual transactions related to this trend.",
-      "items": {
-        "$ref": "#/components/schemas/ClientTransactionTrend"
-      }
-    }
-  }
-},
-         "CreateAccount":{
-            "title":"CreateAccount",
-            "required":[
-               "email",
-               "password",
-               "phone_number"
-            ],
-            "type":"object",
-            "properties":{
-               "email":{
-                  "title":"Email",
-                  "type":"string",
-                  "format":"email"
-               },
-               "password":{
-                  "title":"Password",
-                  "type":"string"
-               },
-               "phone_number":{
-                  "title":"Phone Number",
-                  "type":"string"
-               },
-               "last_name":{
-                  "title":"Last Name",
-                  "type":"string"
-               },
-               "first_name":{
-                  "title":"First Name",
-                  "type":"string"
-               },
-               "company_name":{
-                  "title":"Company Name",
-                  "type":"string"
-               },
-               "preferred_name":{
-                  "title":"Preferred Name",
-                  "type":"string"
-               }
-            }
-         },
-         "CreateClient":{
-            "title":"CreateClient",
-            "type":"object",
-            "properties":{
-               "email":{
-                  "title":"Email",
-                  "type":"string"
-               },
-               "phone_number":{
-                  "title":"Phone Number",
-                  "type":"string"
-               },
-               "last_name":{
-                  "title":"Last Name",
-                  "type":"string"
-               },
-               "first_name":{
-                  "title":"First Name",
-                  "type":"string"
-               },
-               "national_id":{
-                  "title":"National Id",
-                  "type":"string"
-               }
-            }
-         },
-         "CreateLinkReponse":{
-            "title":"CreateLinkReponse",
-            "required":[
-               "link"
-            ],
-            "type":"object",
-            "properties":{
-               "link":{
-                  "title":"Link",
-                  "type":"string"
-               }
-            }
-         },
-         "Document":{
-            "title":"Document",
-            "type":"object",
-            "properties":{
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "url":{
-                  "title":"Url",
-                  "type":"string"
-               },
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "results":{
-                  "title":"Results",
-                  "type":"string"
-               },
-               "last_anaylzed_on":{
-                  "title":"Last Anaylzed On",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "password":{
-                  "title":"Password",
-                  "type":"string"
-               },
-               "status":{
-                  "$ref":"#/components/schemas/DocumentStatus"
-               },
-               "transactions":{
-                  "title":"Transactions",
-                  "type":"string"
-               },
-               "props":{
-                  "title":"Props",
-                  "type":"string"
-               },
-               "client_id":{
-                  "title":"Client Id",
-                  "type":"integer"
-               },
-               "client":{
-                  "$ref":"#/components/schemas/ClientResponse"
-               },
-               "created_at":{
-                  "title":"Created At",
-                  "type":"string",
-                  "format":"date-time"
-               },
-               "account_id":{
-                  "title":"Account Id",
-                  "type":"integer"
-               },
-               "type":{
-                  "title":"Type",
-                  "type":"string"
-               }
-            }
-         },
-         "DocumentCreate":{
-            "title":"DocumentCreate",
-            "required":[
-               "url",
-               "name"
-            ],
-            "type":"object",
-            "properties":{
-               "url":{
-                  "title":"Url",
-                  "type":"string"
-               },
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "client_id":{
-                  "title":"Client Id",
-                  "type":"integer"
-               },
-               "password":{
-                  "title":"Password",
-                  "type":"string"
-               }
-            }
-         },
-         "DocumentPolling":{
-            "title":"DocumentPolling",
-            "required":[
-               "polling"
-            ],
-            "type":"object",
-            "properties":{
-               "polling":{
-                  "title":"Polling",
-                  "type":"boolean"
-               }
-            }
-         },
-         "DocumentResponse":{
-            "title":"DocumentResponse",
-            "required":[
-               "documents",
-               "count"
-            ],
-            "type":"object",
-            "properties":{
-               "documents":{
-                  "title":"Documents",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/Document"
-                  }
-               },
-               "count":{
-                  "title":"Count",
-                  "type":"integer"
-               }
-            }
-         },
-         "DocumentStatus":{
-            "title":"DocumentStatus",
-            "enum":[
-               1,
-               2,
-               3
-            ],
-            "description":"An enumeration."
-         },
-         "GamblingSummary":{
-            "title":"GamblingSummary",
-            "required":[
-               "platform",
-               "amount_spent",
-               "amount_earned",
-               "gambling_freq"
-            ],
-            "type":"object",
-            "properties":{
-               "platform":{
-                  "title":"Platform",
-                  "type":"string"
-               },
-               "amount_spent":{
-                  "title":"Amount Spent",
-                  "type":"number"
-               },
-               "amount_earned":{
-                  "title":"Amount Earned",
-                  "type":"number"
-               },
-               "gambling_freq":{
-                  "title":"Gambling Freq",
-                  "type":"integer"
-               }
-            }
-         },
-         "GamblingSummaryResponse":{
-            "title":"GamblingSummaryResponse",
-            "required":[
-               "overview",
-               "summary"
-            ],
-            "type":"object",
-            "properties":{
-               "overview":{
-                  "$ref":"#/components/schemas/GamblingSummary"
-               },
-               "summary":{
-                  "title":"Summary",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/GamblingSummary"
-                  }
-               }
-            }
-         },
-         "HTTPValidationError":{
-            "title":"HTTPValidationError",
-            "type":"object",
-            "properties":{
-               "detail":{
-                  "title":"Detail",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/ValidationError"
-                  }
-               }
-            }
-         },
-         "Institution":{
-            "title":"Institution",
-            "required":[
-               "name",
-               "type",
-               "country",
-               "primaryColor",
-               "identifier",
-               "icon"
-            ],
-            "type":"object",
-            "properties":{
-               "name":{
-                  "title":"Name",
-                  "type":"string"
-               },
-               "type":{
-                  "title":"Type",
-                  "type":"string"
-               },
-               "ui":{
-                  "title":"Ui"
-               },
-               "country":{
-                  "title":"Country",
-                  "type":"string"
-               },
-               "primaryColor":{
-                  "title":"Primarycolor",
-                  "type":"string"
-               },
-               "identifier":{
-                  "title":"Identifier",
-                  "type":"string"
-               },
-               "icon":{
-                  "title":"Icon",
-                  "type":"string"
-               },
-               "auth_methods":{
-                  "title":"Auth Methods"
-               },
-               "forgotPasswordLink":{
-                  "title":"Forgotpasswordlink"
-               },
-               "timeout":{
-                  "title":"Timeout",
-                  "type":"integer"
-               },
-               "bankCode":{
-                  "title":"Bankcode",
-                  "type":"string"
-               },
-               "bank_code":{
-                  "title":"Bank Code",
-                  "type":"string"
-               },
-               "sandbox":{
-                  "title":"Sandbox"
-               }
-            }
-         },
-         "LinkEmail":{
-            "title":"LinkEmail",
-            "required":[
-               "link"
-            ],
-            "type":"object",
-            "properties":{
-               "link":{
-                  "title":"Link",
-                  "type":"string"
-               }
-            }
-         },
-         "LinkMono":{
-            "title":"LinkMono",
-            "required":[
-               "code"
-            ],
-            "type":"object",
-            "properties":{
-               "code":{
-                  "title":"Code",
-                  "type":"string"
-               }
-            }
-         },
-         "LinkResponse":{
-            "title":"LinkResponse",
-            "required":[
-               "client",
-               "link"
-            ],
-            "type":"object",
-            "properties":{
-               "client":{
-                  "$ref":"#/components/schemas/ClientResponse"
-               },
-               "link":{
-                  "title":"Link",
-                  "type":"string"
-               }
-            }
-         },
-         "LoanEsimate":{
-            "title":"LoanEsimate",
-            "required":[
-               "amount"
-            ],
-            "type":"object",
-            "properties":{
-               "amount":{
-                  "title":"Amount",
-                  "type":"integer"
-               }
-            }
-         },
-         "LoanEsimateRequest":{
-            "title":"LoanEsimateRequest",
-            "required":[
-               "calculator"
-            ],
-            "type":"object",
-            "properties":{
-               "calculator":{
-                  "title":"Calculator",
-                  "type":"integer"
-               }
-            }
-         },
-         "MetaData":{
-            "title":"MetaData",
-            "required":[
-               "Item"
-            ],
-            "type":"object",
-            "properties":{
-               "Item":{
-                  "title":"Item",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/CallbackMetadataItem"
-                  }
-               }
-            }
-         },
-         "Msg":{
-            "title":"Msg",
-            "required":[
-               "msg"
-            ],
-            "type":"object",
-            "properties":{
-               "msg":{
-                  "title":"Msg",
-                  "type":"string"
-               }
-            }
-         },
-         "OverdraftOverview":{
-            "title":"OverdraftOverview",
-            "required":[
-               "amount_taken",
-               "amount_paid",
-               "average_loan",
-               "number_of_loans"
-            ],
-            "type":"object",
-            "properties":{
-               "amount_taken":{
-                  "title":"Amount Taken",
-                  "type":"number"
-               },
-               "amount_paid":{
-                  "title":"Amount Paid",
-                  "type":"number"
-               },
-               "average_loan":{
-                  "title":"Average Loan",
-                  "type":"number"
-               },
-               "number_of_loans":{
-                  "title":"Number Of Loans",
-                  "type":"number"
-               }
-            }
-         },
-         "OverdraftResponse":{
-            "title":"OverdraftResponse",
-            "required":[
-               "overview",
-               "transactions"
-            ],
-            "type":"object",
-            "properties":{
-               "overview":{
-                  "$ref":"#/components/schemas/OverdraftOverview"
-               },
-               "transactions":{
-                  "title":"Transactions",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/OverdraftTransaction"
-                  }
-               }
-            }
-         },
-         "OverdraftTransaction":{
-            "title":"OverdraftTransaction",
-            "required":[
-               "message",
-               "amount",
-               "count"
-            ],
-            "type":"object",
-            "properties":{
-               "message":{
-                  "title":"Message",
-                  "type":"string"
-               },
-               "amount":{
-                  "title":"Amount",
-                  "type":"number"
-               },
-               "count":{
-                  "title":"Count",
-                  "type":"integer"
-               }
-            }
-         }, 
-         "DocumentLoanSummary": {
+          }
+        }
+      },
+      "OverdraftTransaction": {
+        "title": "OverdraftTransaction",
+        "required": ["message", "amount", "count"],
+        "type": "object",
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "number"
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          }
+        }
+      },
+      "DocumentLoanSummary": {
         "title": "DocumentLoanSummary",
         "required": [
           "lender",
@@ -2980,210 +2858,185 @@
           }
         }
       },
-         "SavingSummary":{
-            "title":"SavingSummary",
-            "required":[
-               "total_saved",
-               "total_withdrawn",
-               "platforms"
-            ],
-            "type":"object",
-            "properties":{
-               "total_saved":{
-                  "title":"Total Saved",
-                  "type":"integer"
-               },
-               "total_withdrawn":{
-                  "title":"Total Withdrawn",
-                  "type":"integer"
-               },
-               "platforms":{
-                  "title":"Platforms",
-                  "type":"integer"
-               }
+      "SavingSummary": {
+        "title": "SavingSummary",
+        "required": ["total_saved", "total_withdrawn", "platforms"],
+        "type": "object",
+        "properties": {
+          "total_saved": {
+            "title": "Total Saved",
+            "type": "integer"
+          },
+          "total_withdrawn": {
+            "title": "Total Withdrawn",
+            "type": "integer"
+          },
+          "platforms": {
+            "title": "Platforms",
+            "type": "integer"
+          }
+        }
+      },
+      "SavingsSummary": {
+        "title": "SavingsSummary",
+        "required": [
+          "platform",
+          "total_saved",
+          "total_withdrawn",
+          "saved_count",
+          "withdrawn_count"
+        ],
+        "type": "object",
+        "properties": {
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "total_saved": {
+            "title": "Total Saved",
+            "type": "integer"
+          },
+          "total_withdrawn": {
+            "title": "Total Withdrawn",
+            "type": "integer"
+          },
+          "saved_count": {
+            "title": "Saved Count",
+            "type": "integer"
+          },
+          "withdrawn_count": {
+            "title": "Withdrawn Count",
+            "type": "integer"
+          }
+        }
+      },
+      "SavingsSummaryResponse": {
+        "title": "SavingsSummaryResponse",
+        "required": ["saving_summary", "summary"],
+        "type": "object",
+        "properties": {
+          "saving_summary": {
+            "title": "Saving Summary",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavingsSummary"
             }
-         },
-         "SavingsSummary":{
-            "title":"SavingsSummary",
-            "required":[
-               "platform",
-               "total_saved",
-               "total_withdrawn",
-               "saved_count",
-               "withdrawn_count"
-            ],
-            "type":"object",
-            "properties":{
-               "platform":{
-                  "title":"Platform",
-                  "type":"string"
-               },
-               "total_saved":{
-                  "title":"Total Saved",
-                  "type":"integer"
-               },
-               "total_withdrawn":{
-                  "title":"Total Withdrawn",
-                  "type":"integer"
-               },
-               "saved_count":{
-                  "title":"Saved Count",
-                  "type":"integer"
-               },
-               "withdrawn_count":{
-                  "title":"Withdrawn Count",
-                  "type":"integer"
-               }
+          },
+          "summary": {
+            "$ref": "#/components/schemas/SavingSummary"
+          }
+        }
+      },
+      "TransactionResponse": {
+        "title": "TransactionResponse",
+        "required": ["id", "amount", "narration", "date"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "number"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "narration": {
+            "title": "Narration",
+            "type": "string"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Trends": {
+        "title": "Trends",
+        "enum": [
+          "money_sent",
+          "money_received",
+          "agent_withdrawal",
+          "agent_deposit",
+          "shopping",
+          "fuel"
+        ],
+        "description": "An enumeration."
+      },
+      "UploadedFile": {
+        "title": "UploadedFile",
+        "required": ["status", "file_url"],
+        "type": "object",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "file_url": {
+            "title": "File Url",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
             }
-         },
-         "SavingsSummaryResponse":{
-            "title":"SavingsSummaryResponse",
-            "required":[
-               "saving_summary",
-               "summary"
-            ],
-            "type":"object",
-            "properties":{
-               "saving_summary":{
-                  "title":"Saving Summary",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/SavingsSummary"
-                  }
-               },
-               "summary":{
-                  "$ref":"#/components/schemas/SavingSummary"
-               }
-            }
-         },
-         "TransactionResponse":{
-            "title":"TransactionResponse",
-            "required":[
-               "id",
-               "amount",
-               "narration",
-               "date"
-            ],
-            "type":"object",
-            "properties":{
-               "id":{
-                  "title":"Id",
-                  "type":"integer"
-               },
-               "type":{
-                  "title":"Type",
-                  "type":"string"
-               },
-               "amount":{
-                  "title":"Amount",
-                  "type":"number"
-               },
-               "currency":{
-                  "title":"Currency",
-                  "type":"string"
-               },
-               "narration":{
-                  "title":"Narration",
-                  "type":"string"
-               },
-               "date":{
-                  "title":"Date",
-                  "type":"string",
-                  "format":"date-time"
-               }
-            }
-         },
-         "Trends":{
-            "title":"Trends",
-            "enum":[
-               "money_sent",
-               "money_received",
-               "agent_withdrawal",
-               "agent_deposit",
-               "shopping",
-               "fuel"
-            ],
-            "description":"An enumeration."
-         },
-         "UploadedFile":{
-            "title":"UploadedFile",
-            "required":[
-               "status",
-               "file_url"
-            ],
-            "type":"object",
-            "properties":{
-               "status":{
-                  "title":"Status",
-                  "type":"string"
-               },
-               "file_url":{
-                  "title":"File Url",
-                  "type":"string"
-               }
-            }
-         },
-         "ValidationError":{
-            "title":"ValidationError",
-            "required":[
-               "loc",
-               "msg",
-               "type"
-            ],
-            "type":"object",
-            "properties":{
-               "loc":{
-                  "title":"Location",
-                  "type":"array",
-                  "items":{
-                     "anyOf":[
-                        {
-                           "type":"string"
-                        },
-                        {
-                           "type":"integer"
-                        }
-                     ]
-                  }
-               },
-               "msg":{
-                  "title":"Message",
-                  "type":"string"
-               },
-               "type":{
-                  "title":"Error Type",
-                  "type":"string"
-               }
-            }
-         },
-         "ProvidersSchema": {
-           "title": "ProvidersSchema",
-           "required": [
-             "code",
-             "name",
-             "description"
-           ],
-           "type": "object",
-           "properties": {
-             "code": {
-               "title": "Code",
-               "type": "string"
-             },
-             "name": {
-               "title": "Name",
-               "type": "string"
-             },
-             "description": {
-               "title": "Description",
-               "type": "string"
-             }
-           }
-         },
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "ProvidersSchema": {
+        "title": "ProvidersSchema",
+        "required": ["code", "name", "description"],
+        "type": "object",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        }
+      },
       "Body_check_modification_by_url": {
         "title": "Body_check_modification_by_url",
-        "required": [
-          "file_url"
-        ],
+        "required": ["file_url"],
         "type": "object",
         "properties": {
           "file_url": {
@@ -3200,27 +3053,27 @@
           }
         }
       }
-      },
-      "securitySchemes":{
-         "OAuth2PasswordBearer":{
-            "type":"oauth2",
-            "flows":{
-               "password":{
-                  "scopes":{
-                     "edit:business_client":"Perform update functions on business clients nvbv",
-                     "delete:business_client":"Perform update functions on business clients bcvbvc",
-                     "view:business_client":"Can view all clients of the business data",
-                     "edit:client":"Perform update functions on customers",
-                     "delete:client":"Perform update functions on customers",
-                     "view:client":"Can view client data",
-                     "upload:document":"User would be able to upload a client document",
-                     "view:business_documents":"Can view all documents of the business",
-                     "view:calculator":"Can view all calculators of the business"
-                  },
-                  "tokenUrl":"/login/access-token"
-               }
-            }
-         }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {
+              "edit:business_client": "Perform update functions on business clients nvbv",
+              "delete:business_client": "Perform update functions on business clients bcvbvc",
+              "view:business_client": "Can view all clients of the business data",
+              "edit:client": "Perform update functions on customers",
+              "delete:client": "Perform update functions on customers",
+              "view:client": "Can view client data",
+              "upload:document": "User would be able to upload a client document",
+              "view:business_documents": "Can view all documents of the business",
+              "view:calculator": "Can view all calculators of the business"
+            },
+            "tokenUrl": "/login/access-token"
+          }
+        }
       }
-   }
+    }
+  }
 }
