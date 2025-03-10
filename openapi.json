@@ -1923,7 +1923,7 @@
             "type":"object",
             "properties":{
                "last_3months_disposable_income":{
-                  "title":"Last 3Months Document Affordability",
+                  "title":"Last 3 Months Diaposable Income",
                   "type":"number"
                }
             }
