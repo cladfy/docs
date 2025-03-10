@@ -1245,7 +1245,6 @@
             ]
          }
       },
-      ,
    "/clients/{id}/all_analysis_data": {
       "get": {
          "tags": [
