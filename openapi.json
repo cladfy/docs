@@ -1468,7 +1468,8 @@
                }
             ]
          }
-      },
+      }
+   },
    "/businesses/clients": {
       "get": {
          "tags": [
@@ -1826,8 +1827,7 @@
             }
          }
       }
-   }
-},
+   },
 "components": {
    "schemas": {
       "Account": {
