@@ -1737,6 +1737,30 @@
       }
     }
   },
+   "/trends_types/": {
+     "get": {
+       "tags": ["trends_types"],
+       "summary": "Get Trends Types",
+       "description": "Retrieve a list of available trend types with their codes and descriptions.",
+       "operationId": "get_trends_types",
+       "responses": {
+         "200": {
+           "description": "Successful Response",
+           "content": {
+             "application/json": {
+               "schema": {
+                 "title": "Response Get Trends Types",
+                 "type": "array",
+                 "items": {
+                   "$ref": "#/components/schemas/TrendsTypesSchema"
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }, 
   "components": {
     "schemas": {
       "AllClientAnalysisData": {
@@ -3034,6 +3058,24 @@
           }
         }
       },
+         "TrendsTypesSchema": {
+           "title": "TrendsTypesSchema",
+           "type": "object",
+           "properties": {
+             "code": {
+               "title": "Code",
+               "type": "string"
+             },
+             "name": {
+               "title": "Name",
+               "type": "string"
+             },
+             "description": {
+               "title": "Description",
+               "type": "string"
+             }
+           }
+         },       
       "Body_check_modification_by_url": {
         "title": "Body_check_modification_by_url",
         "required": ["file_url"],
