@@ -1004,14 +1004,14 @@
             ]
          }
       },
-      "/clients/{id}/affordability":{
+      "/clients/{id}/disposable_income":{
          "get":{
             "tags":[
                "Clients"
             ],
             "summary":"Get a Client Affordability amount",
-            "description":"Calling this endpoint returns an amount in the account-specified currency that a client can set aside DAILY to repay a loan. It is the affordability factor; a Debt Burden Ratio (DBR), which is calculated as a ratio of the total monthly debt payments that the customer is making against the customer's total income from the last Three months. A lower DBR corresponds to a high affordability",
-            "operationId":"get_client_affordability",
+            "description":"Calling this endpoint returns an amount in the account-specified currency that a client can set aside DAILY to repay a loan. It is the DisposableIncome factor; a Debt Burden Ratio (DBR), which is calculated as a ratio of the total monthly debt payments that the customer is making against the customer's total income from the last Three months. A lower DBR corresponds to a high DisposableIncome",
+            "operationId":"get_client_DisposableIncome",
             "parameters":[
                {
                   "required":true,
@@ -1119,7 +1119,7 @@
                "Clients"
             ],
             "summary":"Estimate Loan",
-            "description":"This endpoint returns an amount in the account-specified currency that a client can afford to repay comfrotably. Cladfy calculate using the affordability ratio, clients income, spending and the variables from a specific calculator. The calculator variables must be provided when calling this endpoint",
+            "description":"This endpoint returns an amount in the account-specified currency that a client can afford to repay comfrotably. Cladfy calculate using the DisposableIncome ratio, clients income, spending and the variables from a specific calculator. The calculator variables must be provided when calling this endpoint",
             "operationId":"esimateClientLoan",
             "parameters":[
                {
@@ -1709,24 +1709,24 @@
             }
          }
       },
-      "/banks/": {
+      "/providers/": {
       "get": {
         "tags":[
-               "banks"
+               "providers"
             ],
-        "summary": "Get Banks",
-        "description": "Get a list of supported banks with their codes and descriptions.",
-        "operationId": "get_banks",
+        "summary": "Get providers",
+        "description": "Get a list of supported providers with their codes and descriptions.",
+        "operationId": "get_providers",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response Get Banks",
+                  "title": "Response Get providers",
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/BankSchema"
+                    "$ref": "#/components/schemas/ProvidersSchema"
                   }
                 }
               }
@@ -1880,11 +1880,11 @@
          "AffordabilityResponse":{
             "title":"AffordabilityResponse",
             "required":[
-               "last_3months_document_affordability"
+               "last_3months_disposable_income"
             ],
             "type":"object",
             "properties":{
-               "last_3months_document_affordability":{
+               "last_3months_disposable_income":{
                   "title":"Last 3Months Document Affordability",
                   "type":"number"
                }
@@ -3098,8 +3098,8 @@
                }
             }
          },
-         "BankSchema": {
-           "title": "BankSchema",
+         "ProvidersSchema": {
+           "title": "ProvidersSchema",
            "required": [
              "code",
              "name",
