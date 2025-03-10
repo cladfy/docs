@@ -1438,6 +1438,37 @@
             ]
          }
       },
+      "/businesses/clients": {
+         "get": {
+            "tags": [
+               "businesses"
+            ],
+            "summary": "Get All Business Clients",
+            "description": "Retrieve all clients associated with the authenticated business.",
+            "operationId": "get_all_business_clients",
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "title": "Response GetAllBusinessClients",
+                           "type": "array",
+                           "items": {
+                              "$ref": "#/components/schemas/ClientResponse"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "security": [
+               {
+                  "OAuth2PasswordBearer": []
+               }
+            ]
+         }
+      },
       "/documents":{
          "post":{
             "tags":[
