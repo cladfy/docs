@@ -1245,161 +1245,161 @@
             ]
          }
       },
-   "/clients/{id}/all_analysis_data": {
-      "get": {
-         "tags": [
-            "Clients"
-         ],
-         "summary": "Get All Client Analysis Data",
-         "description": "This endpoint combines data from multiple endpoints into a single comprehensive response, including client information, summary statistics, cashflow, spending patterns, loans, savings, gambling, overdraft, disposable_income metrics, and trends across various categories (money sent/received, agent activities, shopping, fuel).",
-         "operationId": "get_all_client_analysis_data",
-         "parameters": [
-            {
-               "required": true,
-               "schema": {
-                  "title": "Id",
-                  "type": "integer"
+      "/clients/{id}/all_analysis_data": {
+         "get": {
+            "tags": [
+               "Clients"
+            ],
+            "summary": "Get All Client Analysis Data",
+            "description": "This endpoint combines data from multiple endpoints into a single comprehensive response, including client information, summary statistics, cashflow, spending patterns, loans, savings, gambling, overdraft, disposable_income metrics, and trends across various categories (money sent/received, agent activities, shopping, fuel).",
+            "operationId": "get_all_client_analysis_data",
+            "parameters": [
+               {
+                  "required": true,
+                  "schema": {
+                     "title": "Id",
+                     "type": "integer"
+                  },
+                  "name": "id",
+                  "in": "path"
                },
-               "name": "id",
-               "in": "path"
-            },
-            {
-               "required": false,
-               "schema": {
-                  "title": "Account Id",
-                  "type": "integer"
-               },
-               "name": "account_id",
-               "in": "query"
-            }
-         ],
-         "responses": {
-            "200": {
-               "description": "Successful Response",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "type": "object",
-                        "properties": {
-                           "client_info": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/ClientResponse"
-                              }
-                           },
-                           "summary": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/ClientSummaryResponse"
-                              }
-                           },
-                           "cashflow": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/CashflowResponse"
-                              }
-                           },
-                           "spending": {
-                              "type": "object"
-                           },
-                           "loans": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
-                              }
-                           },
-                           "savings": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/SavingsSummaryResponse"
-                              }
-                           },
-                           "gambling": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/GamblingSummaryResponse"
-                              }
-                           },
-                           "overdraft": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/OverdraftResponse"
-                              }
-                           },
-                           "disposable_income": {
-                              "type": "object",
-                              "properties": {
-                                 "$ref": "#/components/schemas/DisposableIncomeResponse"
-                              }
-                           },
-                           "trends": {
-                              "type": "object",
-                              "properties": {
-                                 "money_sent": {
-                                    "$ref": "#/components/schemas/ClientTrends"
-                                 },
-                                 "money_received": {
-                                    "$ref": "#/components/schemas/ClientTrends"
-                                 },
-                                 "agent_withdrawal": {
-                                    "$ref": "#/components/schemas/ClientTrends"
-                                 },
-                                 "agent_deposit": {
-                                    "$ref": "#/components/schemas/ClientTrends"
-                                 },
-                                 "shopping": {
-                                    "$ref": "#/components/schemas/ClientTrends"
-                                 },
-                                 "fuel": {
-                                    "$ref": "#/components/schemas/ClientTrends"
+               {
+                  "required": false,
+                  "schema": {
+                     "title": "Account Id",
+                     "type": "integer"
+                  },
+                  "name": "account_id",
+                  "in": "query"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful Response",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "type": "object",
+                           "properties": {
+                              "client_info": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/ClientResponse"
+                                 }
+                              },
+                              "summary": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/ClientSummaryResponse"
+                                 }
+                              },
+                              "cashflow": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/CashflowResponse"
+                                 }
+                              },
+                              "spending": {
+                                 "type": "object"
+                              },
+                              "loans": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+                                 }
+                              },
+                              "savings": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/SavingsSummaryResponse"
+                                 }
+                              },
+                              "gambling": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/GamblingSummaryResponse"
+                                 }
+                              },
+                              "overdraft": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/OverdraftResponse"
+                                 }
+                              },
+                              "disposable_income": {
+                                 "type": "object",
+                                 "properties": {
+                                    "$ref": "#/components/schemas/DisposableIncomeResponse"
+                                 }
+                              },
+                              "trends": {
+                                 "type": "object",
+                                 "properties": {
+                                    "money_sent": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    },
+                                    "money_received": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    },
+                                    "agent_withdrawal": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    },
+                                    "agent_deposit": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    },
+                                    "shopping": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    },
+                                    "fuel": {
+                                       "$ref": "#/components/schemas/ClientTrends"
+                                    }
                                  }
                               }
                            }
                         }
                      }
                   }
-               }
-            },
-            "403": {
-               "description": "Not Authorized",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "$ref": "#/components/schemas/Msg"
+               },
+               "403": {
+                  "description": "Not Authorized",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/Msg"
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Client Not Found",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/Msg"
+                        }
+                     }
+                  }
+               },
+               "422": {
+                  "description": "Validation Error",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "$ref": "#/components/schemas/HTTPValidationError"
+                        }
                      }
                   }
                }
             },
-            "404": {
-               "description": "Client Not Found",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "$ref": "#/components/schemas/Msg"
-                     }
-                  }
+            "security": [
+               {
+                  "OAuth2PasswordBearer": [
+                     "view:client"
+                  ]
                }
-            },
-            "422": {
-               "description": "Validation Error",
-               "content": {
-                  "application/json": {
-                     "schema": {
-                        "$ref": "#/components/schemas/HTTPValidationError"
-                     }
-                  }
-               }
-            }
-         },
-         "security": [
-            {
-               "OAuth2PasswordBearer": [
-                  "view:client"
-               ]
-            }
-         ]
-      }
-   },
+            ]
+         }
+      },
       "/businesses/calculators":{
          "get":{
             "tags":[
@@ -1738,6 +1738,62 @@
     },
    "components":{
       "schemas":{
+         "AllClientAnalysisData": {
+      "title": "AllClientAnalysisData",
+      "type": "object",
+      "properties": {
+        "client_info": {
+          "$ref": "#/components/schemas/ClientResponse"
+        },
+        "summary": {
+          "$ref": "#/components/schemas/ClientSummaryResponse"
+        },
+        "cashflow": {
+          "$ref": "#/components/schemas/CashflowResponse"
+        },
+        "spending": {
+          "type": "object"
+        },
+        "loans": {
+          "$ref": "#/components/schemas/DocumentLoanSummaryResponse"
+        },
+        "savings": {
+          "$ref": "#/components/schemas/SavingsSummaryResponse"
+        },
+        "gambling": {
+          "$ref": "#/components/schemas/GamblingSummaryResponse"
+        },
+        "overdraft": {
+          "$ref": "#/components/schemas/OverdraftResponse"
+        },
+        "disposable_income": {
+          "$ref": "#/components/schemas/DisposableIncomeResponse"
+        },
+        "trends": {
+          "type": "object",
+          "properties": {
+            "money_sent": {
+              "$ref": "#/components/schemas/ClientTrends"
+            },
+            "money_received": {
+              "$ref": "#/components/schemas/ClientTrends"
+            },
+            "agent_withdrawal": {
+              "$ref": "#/components/schemas/ClientTrends"
+            },
+            "agent_deposit": {
+              "$ref": "#/components/schemas/ClientTrends"
+            },
+            "shopping": {
+              "$ref": "#/components/schemas/ClientTrends"
+            },
+            "fuel": {
+              "$ref": "#/components/schemas/ClientTrends"
+            }
+          }
+        }
+      }
+    },
          "Account":{
             "title":"Account",
             "required":[
