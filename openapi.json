@@ -1735,8 +1735,7 @@
           }
         }
       }
-    }
-  },
+    },
    "/trends_types/": {
      "get": {
        "tags": ["trends_types"],
