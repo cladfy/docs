@@ -1440,10 +1440,10 @@
             ]
          }
       },
-      "/businesses/clients": {
+      "/business/clients": {
          "get": {
             "tags": [
-               "businesses"
+               "business"
             ],
             "summary": "Get All Business Clients",
             "description": "Retrieve all clients associated with the authenticated business.",
