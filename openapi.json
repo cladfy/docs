@@ -1105,78 +1105,80 @@
             ]
          }
       },
-      "/clients/{id}/trends":{
-         "get":{
-            "tags":[
-               "Clients"
-            ],
-            "summary":"Get Client Trends",
-            "description":"This resource represents the known trends on the client transactions. This currently only supports mpesa transactions.",
-            "operationId":"clientTrends",
-            "parameters":[
-               {
-                  "required":true,
-                  "schema":{
-                     "title":"Id",
-                     "type":"integer"
-                  },
-                  "name":"id",
-                  "in":"path"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "title":"Account Id",
-                     "type":"integer"
-                  },
-                  "name":"account_id",
-                  "in":"query"
-               },
-               {
-                  "required":false,
-                  "schema":{
-                     "allOf":[
-                        {
-                           "$ref":"#/components/schemas/Trends"
-                        }
-                     ],
-                     "default":"money_sent"
-                  },
-                  "name":"trend",
-                  "in":"query"
+      "/clients/{id}/trends": {
+      "get": {
+         "tags": [
+            "Clients"
+         ],
+         "summary": "Get Client Trends",
+         "description": "Retrieve known transaction trends for a client. Supports filtering by trend type.",
+         "operationId": "clientTrends",
+         "parameters": [
+            {
+               "name": "id",
+               "in": "path",
+               "required": true,
+               "schema": {
+                  "title": "Id",
+                  "type": "integer"
                }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Successful Response",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/ClientTrends"
-                        }
-                     }
-                  }
-               },
-               "422":{
-                  "description":"Validation Error",
-                  "content":{
-                     "application/json":{
-                        "schema":{
-                           "$ref":"#/components/schemas/HTTPValidationError"
-                        }
+            },
+            {
+               "name": "account_id",
+               "in": "query",
+               "required": false,
+               "schema": {
+                  "title": "Account Id",
+                  "type": "integer"
+               }
+            },
+            {
+               "name": "trend",
+               "in": "query",
+               "required": false,
+               "schema": {
+                  "type": "string",
+                  "enum": [
+                     "money_sent",
+                     "money_received",
+                     "agent_withdrawal",
+                     "agent_deposit",
+                     "shopping",
+                     "fuel"
+                  ],
+                  "default": "money_sent"
+               }
+            }
+         ],
+         "responses": {
+            "200": {
+               "description": "Successful Response",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/ClientTrends"
                      }
                   }
                }
             },
-            "security":[
-               {
-                  "OAuth2PasswordBearer":[
-                     
-                  ]
+            "422": {
+               "description": "Validation Error",
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "$ref": "#/components/schemas/HTTPValidationError"
+                     }
+                  }
                }
-            ]
-         }
-      },
+            }
+         },
+         "security": [
+            {
+               "OAuth2PasswordBearer": []
+            }
+         ]
+      }
+   },
       "/clients/{id}/all_analysis_data": {
          "get": {
             "tags": [
@@ -2337,47 +2339,67 @@
                }
             }
          },
-         "ClientTrends":{
-            "title":"ClientTrends",
-            "required":[
-               "total",
-               "count",
-               "largest_amount",
-               "smallest_amount",
-               "avg",
-               "transactions"
-            ],
-            "type":"object",
-            "properties":{
-               "total":{
-                  "title":"Total",
-                  "type":"integer"
-               },
-               "count":{
-                  "title":"Count",
-                  "type":"integer"
-               },
-               "largest_amount":{
-                  "title":"Largest Amount",
-                  "type":"integer"
-               },
-               "smallest_amount":{
-                  "title":"Smallest Amount",
-                  "type":"integer"
-               },
-               "avg":{
-                  "title":"Avg",
-                  "type":"number"
-               },
-               "transactions":{
-                  "title":"Transactions",
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/components/schemas/ClientTransactionTrend"
-                  }
-               }
-            }
-         },
+        "ClientTrends": {
+  "title": "ClientTrends",
+  "required": [
+    "trend_type",
+    "total",
+    "count",
+    "largest_amount",
+    "smallest_amount",
+    "avg",
+    "transactions"
+  ],
+  "type": "object",
+  "properties": {
+    "trend_type": {
+      "title": "Trend Type",
+      "type": "string",
+      "enum": [
+        "money_sent",
+        "money_received",
+        "agent_withdrawal",
+        "agent_deposit",
+        "shopping",
+        "fuel"
+      ],
+      "description": "The type of transaction trend being analyzed."
+    },
+    "total": {
+      "title": "Total",
+      "type": "integer",
+      "description": "Total transaction amount for the trend type."
+    },
+    "count": {
+      "title": "Count",
+      "type": "integer",
+      "description": "Total number of transactions in this trend."
+    },
+    "largest_amount": {
+      "title": "Largest Amount",
+      "type": "integer",
+      "description": "The highest transaction amount recorded for this trend."
+    },
+    "smallest_amount": {
+      "title": "Smallest Amount",
+      "type": "integer",
+      "description": "The smallest transaction amount recorded for this trend."
+    },
+    "avg": {
+      "title": "Avg",
+      "type": "number",
+      "description": "The average transaction value for the given trend type."
+    },
+    "transactions": {
+      "title": "Transactions",
+      "type": "array",
+      "description": "A list of individual transactions related to this trend.",
+      "items": {
+        "$ref": "#/components/schemas/ClientTransactionTrend"
+      }
+    }
+  }
+},
          "CreateAccount":{
             "title":"CreateAccount",
             "required":[
